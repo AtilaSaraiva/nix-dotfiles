@@ -95,6 +95,8 @@ in
       swaylock
       xwayland
       swayidle
+      swaytools
+      wf-recorder
       wl-clipboard
       sway-contrib.grimshot
       mako # notification daemon
@@ -257,7 +259,6 @@ in
      duf
      radeontop
      btdu
-     swaytools
 
      # Image viewers
      feh
