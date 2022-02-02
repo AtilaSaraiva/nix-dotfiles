@@ -253,12 +253,10 @@ in
      ripgrep
      mate.pluma
      rmlint
-     unstable.ouch
      podman-compose
      pacman
      smartmontools
      iotop
-     zpaq
      easyeffects
      virt-manager
      xfsprogs
@@ -268,15 +266,13 @@ in
      btdu
      swaytools
 
-
      # Image viewers
      feh
 
      # Compression
+     unstable.ouch
      unzip
-
-     # Music
-     ytmdesktop
+     zpaq
 
      # Browsers
      firefox-wayland
