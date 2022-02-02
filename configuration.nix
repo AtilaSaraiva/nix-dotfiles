@@ -328,6 +328,7 @@ in
      steam-run
      protontricks
      multimc
+     unstable.cataclysm-dda
    ];
 
 
