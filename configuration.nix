@@ -21,13 +21,6 @@ in
     user = "atila";
   };
 
-  nix = {
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    #extraOptions = ''
-      #experimental-features = nix-command flakes
-    #'';
-  };
-
   services.flatpak.enable = true;
 
   services.upower.enable = true;
@@ -334,6 +327,7 @@ in
      airshipper
      steam-run
      protontricks
+     multimc
    ];
 
 
