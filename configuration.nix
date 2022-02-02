@@ -266,6 +266,7 @@ in
      duf
      radeontop
      btdu
+     swaytools
 
 
      # Image viewers
