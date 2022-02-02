@@ -384,8 +384,8 @@ in
   zramSwap = {
     enable = true;
     priority = 32000;
-    algorithm = "lz4";
-    memoryPercent = 40;
+    algorithm = "zstd";
+    memoryPercent = 90;
   };
   nix.autoOptimiseStore = true;
   nix.gc = {
