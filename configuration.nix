@@ -8,7 +8,6 @@ let
   unstableTarball =
       fetchTarball
         https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
-
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -28,12 +27,6 @@ in
       #experimental-features = nix-command flakes
     #'';
   };
-
-  #nixpkgs.overlays = [ (self: super: {
-    #rpcs3 = super.rpcs3.override {
-      #version = "0.0.20";
-    #};
-  #}) ];
 
   services.flatpak.enable = true;
 
@@ -213,6 +206,8 @@ in
     };
   };
 
+  nixpkgs.overlays = [ (import ./pkgs) ];
+
   #nixpkgs.overlays = [
     #(
       #self: super:
@@ -270,6 +265,7 @@ in
      libxfs
      duf
      radeontop
+     btdu
 
 
      # Image viewers
@@ -404,6 +400,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 
 }
