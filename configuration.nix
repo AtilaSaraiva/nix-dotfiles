@@ -330,6 +330,7 @@ in
      protontricks
      multimc
      unstable.cataclysm-dda
+     ryujinx
    ];
 
 
