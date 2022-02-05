@@ -39,55 +39,55 @@
   fileSystems."/home/atila/Files/Imagens" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Imagens" "autodefrag" "nofail" "compress-force=zstd:9" "space_cache=v2"];
+      options = [ "subvol=files/@Imagens" "autodefrag" "compress-force=zstd:9" "space_cache=v2"];
     };
 
   fileSystems."/home/atila/Files/Códigos" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Códigos"  "autodefrag" "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Códigos"  "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Mangas" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Mangas" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Mangas" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Músicas" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Músicas" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Músicas" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Documentos" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Documentos" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Documentos" "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Comics" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Comics" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Comics" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Biblioteca-Calibre" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=files/@Biblioteca-Calibre" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=files/@Biblioteca-Calibre" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Games" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=@games" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=@games" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/mnt/Games/hd1tb" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=@games" "autodefrag"  "nofail" "compress-force=zstd:9" "space_cache=v2"];
+      options = [ "subvol=@games" "autodefrag"  "compress-force=zstd:9" "space_cache=v2"];
     };
 
   fileSystems."/home/atila/Games/nvme" =
@@ -105,7 +105,7 @@
   fileSystems."/home/atila/Games/Prefixes" =
     { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
       fsType = "btrfs";
-      options = [ "subvol=@prefixes" "autodefrag" "nofail" "compress-force=zstd:9" "space_cache=v2" ];
+      options = [ "subvol=@prefixes" "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Files/Downloads" =
@@ -139,9 +139,9 @@
     };
 
   swapDevices =
-    [ { 
+    [ {
     	device = "/dev/disk/by-uuid/109c7ce4-4349-465c-ae89-967db832698d";
-    	priority = 5; 
+    	priority = 5;
       }
     ];
 

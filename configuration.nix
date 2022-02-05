@@ -338,6 +338,7 @@ in
   programs.neovim.vimAlias = true;
   environment.variables.EDITOR = "nvim";
   programs.gamemode.enable = true;
+  programs.file-roller.enable = true;
 
   programs.zsh = {
     enable = true;
