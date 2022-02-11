@@ -134,6 +134,7 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
   };
 
   hardware.bluetooth.enable = true;
@@ -259,6 +260,8 @@ in
      duf
      radeontop
      btdu
+     nix-prefetch-scripts
+     qjackctl
 
      # Image viewers
      feh
@@ -290,6 +293,7 @@ in
         python-with-my-packages = python3.withPackages my-python-packages;
      in
         python-with-my-packages)
+     micromamba
 
      # Apps
      wpsoffice
@@ -322,7 +326,7 @@ in
      unstable.heroic
      lutris
      yuzu-ea
-     rpcs3
+     unstable.rpcs3
      pcsx2
      wine64Packages.stagingFull
      airshipper
@@ -363,6 +367,11 @@ in
   };
 
   services.undervolt.gpuOffset = 50;
+  services.locate = {
+    enable = true;
+    locate = pkgs.plocate;
+    pruneBindMounts = false;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh = {

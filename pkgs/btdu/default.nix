@@ -1,4 +1,4 @@
-{stdenv, lib, fetchurl, dub, ncurses, dmd, gdc }:
+{stdenv, lib, fetchurl, dub, ncurses, ldc, zlib, removeReferencesTo }:
 
 let
     _d_ae_ver              = "0.0.3100";
@@ -40,33 +40,42 @@ stdenv.mkDerivation rec {
     '';
 
 
-    nativeBuildInputs = [ dub gdc dmd ];
-    buildInputs = [ ncurses ];
+    nativeBuildInputs = [ dub ldc ];
+    buildInputs = [ ncurses zlib ];
 
     configurePhase = ''
+      runHook preConfigure
       mkdir home
       HOME="home" dub add-local ae ${_d_ae_ver}
       HOME="home" dub add-local d-btrfs-${_d_btrfs_ver} ${_d_btrfs_ver}
       HOME="home" dub add-local ncurses-${_d_ncurses_ver} ${_d_ncurses_ver}
       HOME="home" dub add-local containers-${_d_emsi_containers_ver} ${_d_emsi_containers_ver}
+      runHook postConfigure
     '';
 
     buildPhase = ''
+      runHook preBuild
       cd ${pname}-${version}
       HOME="../home" dub --skip-registry=all build -b release
+      runHook postBuild
     '';
 
     installPhase = ''
+      runHook preInstall
       mkdir -p $out/bin
       cp btdu $out/bin/
+      runHook postInstall
     '';
 
+    postInstall = ''
+      ${removeReferencesTo}/bin/remove-references-to -t ${ldc} $out/bin/btdu
+    '';
 
     meta = with lib; {
       description = "Sampling disk usage profiler for btrfs";
       homepage = "https://github.com/CyberShadow/btdu";
       license = licenses.gpl2Only;
-      platforms = platforms.all;
+      platforms = platforms.linux;
       maintainers = with maintainers; [ atila ];
     };
 }
