@@ -48,7 +48,8 @@ in
   boot.loader.timeout = 3;
   boot.kernel.sysctl = {
     "abi.vsyscall32" = 0;
-    "vm.swappiness" = 5;
+    "vm.swappiness"  = 60;
+    "kernel.sysrq"   = 1;
     };
   boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
   boot.tmpOnTmpfs = true;
