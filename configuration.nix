@@ -301,7 +301,6 @@ in
      # Apps
      wpsoffice
      tdesktop
-     slack
      dropbox
      keepassxc
      zathura
