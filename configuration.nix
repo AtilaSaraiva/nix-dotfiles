@@ -14,6 +14,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      #import ./modules/module-list.nix
     ];
 
   services.plex = {
@@ -110,6 +111,7 @@ in
       jq
       playerctl
       wev
+      sirula
     ];
     extraSessionCommands = ''
       #export SDL_VIDEODRIVER=wayland
@@ -371,6 +373,7 @@ in
   services.locate = {
     enable = true;
     locate = pkgs.plocate;
+    localuser = "atila";
     pruneBindMounts = false;
   };
 
