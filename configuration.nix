@@ -309,6 +309,7 @@ in
      gnome.gucharmap
      mpv
      buku
+     oil-buku
      libsForQt5.okular
      jabref
      texlive.combined.scheme-full
