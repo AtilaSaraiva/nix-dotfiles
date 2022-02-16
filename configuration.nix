@@ -265,6 +265,7 @@ in
      btdu
      nix-prefetch-scripts
      qjackctl
+     distrobox
 
      # Image viewers
      feh
