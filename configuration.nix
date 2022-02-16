@@ -322,6 +322,7 @@ in
      youtube-dl
      sayonara
      homebank
+     droidmote
 
      # Gaming
      zeroad
