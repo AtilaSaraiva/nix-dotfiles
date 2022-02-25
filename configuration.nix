@@ -192,6 +192,7 @@ in
      roboto-mono
      fantasque-sans-mono
      material-icons
+     nerdfonts
   ];
 
   hardware.steam-hardware.enable = true;
@@ -265,7 +266,8 @@ in
      btdu
      nix-prefetch-scripts
      qjackctl
-     distrobox
+     starship
+     #distrobox
 
      # Image viewers
      feh
@@ -300,7 +302,7 @@ in
      micromamba
 
      # Apps
-     wpsoffice
+     onlyoffice-bin
      tdesktop
      dropbox
      keepassxc
