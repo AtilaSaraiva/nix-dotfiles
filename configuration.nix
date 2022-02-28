@@ -231,6 +231,9 @@ in
      neovim
 
      # System tools
+     (pkgs.writeShellScriptBin "nixFlakes" ''
+       exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
+     '')
      wget
      vulkan-tools
      clinfo
