@@ -54,6 +54,11 @@ in
     };
   boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
   boot.tmpOnTmpfs = true;
+  boot.kernelParams = [ "quiet" "udev.log_level=3" ];
+
+  # Silent boot
+  boot.initrd.verbose = false;
+  boot.consoleLogLevel = 0;
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   #boot.extraModulePackages = [ pkgs.linuxPackages.rtl88xxau-aircrack ];
@@ -85,10 +90,17 @@ in
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.defaultSession = "sway";
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "atila";
+  services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.autoLogin.enable = true;
+  #services.xserver.displayManager.autoLogin.user = "atila";
 
+  services.xserver.desktopManager.cinnamon.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.desktopManager.pantheon.enable = true;
+  #services.xserver.desktopManager.xfce.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
+
+  #programs.qt5ct.enable = true;
 
   programs.sway = {
     enable = true;
@@ -112,6 +124,9 @@ in
       playerctl
       wev
       sirula
+      lxappearance
+      adapta-gtk-theme
+      gnome3.adwaita-icon-theme
     ];
     extraSessionCommands = ''
       #export SDL_VIDEODRIVER=wayland
@@ -139,6 +154,7 @@ in
       pulse.enable = true;
       jack.enable = true;
   };
+  hardware.pulseaudio.enable = false;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -149,6 +165,13 @@ in
      shell = pkgs.zsh;
      extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
      uid = 1001;
+  };
+  users.users.sabrina = {
+     isNormalUser = true;
+     createHome = true;
+     shell = pkgs.zsh;
+     extraGroups = [ "networkmanager" ]; # Enable ‘sudo’ for the user.
+     uid = 1002;
   };
 
   virtualisation = {
@@ -231,7 +254,7 @@ in
      neovim
 
      # System tools
-     (pkgs.writeShellScriptBin "nixFlakes" ''
+     (pkgs.writeShellScriptBin "nixf" ''
        exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
      '')
      wget
@@ -269,8 +292,11 @@ in
      btdu
      nix-prefetch-scripts
      qjackctl
-     starship
+     nox
      #distrobox
+     cage
+     binutils
+     nixpkgs-fmt
 
      # Image viewers
      feh
@@ -290,7 +316,8 @@ in
      dbeaver
 
      # File Browsers
-     vifm
+     vifm-full
+
 
 
      # Python
@@ -329,6 +356,7 @@ in
      sayonara
      homebank
      droidmote
+     gimp
 
      # Gaming
      zeroad
@@ -345,6 +373,7 @@ in
      multimc
      unstable.cataclysm-dda
      ryujinx
+     endgame-singularity
    ];
 
 
@@ -353,6 +382,7 @@ in
   environment.variables.EDITOR = "nvim";
   programs.gamemode.enable = true;
   programs.file-roller.enable = true;
+  programs.singularity.enable = true;
 
   programs.zsh = {
     enable = true;
