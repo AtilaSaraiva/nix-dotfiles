@@ -6,8 +6,13 @@
 
 let
   unstableTarball =
-      fetchTarball
-        https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+      builtins.fetchGit {
+        name = "nixos-unstable";
+        url = "https://github.com/NixOS/nixpkgs/";
+        ref = "refs/heads/nixos-unstable";
+        rev = "062a0c5437b68f950b081bbfc8a699d57a4ee026";
+      };
+
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -253,7 +258,7 @@ in
     };
   };
 
-  nixpkgs.overlays = [ (import ./pkgs) ];
+  nixpkgs.overlays = [ (import ../../pkgs) ];
 
   #nixpkgs.overlays = [
     #(
