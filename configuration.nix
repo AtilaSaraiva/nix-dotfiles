@@ -22,6 +22,22 @@ in
     user = "atila";
   };
 
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  services.snapper.configs = {
+    home = {
+      subvolume = "/home";
+      extraConfig = ''
+        ALLOW_USERS="atila"
+        TIMELINE_CREATE=yes
+        TIMELINE_CLEANUP=yes
+      '';
+    };
+  };
+
   services.flatpak.enable = true;
 
   services.upower.enable = true;
@@ -344,7 +360,7 @@ in
      gnome.gucharmap
      mpv
      buku
-     oil-buku
+     unstable.oil-buku
      libsForQt5.okular
      jabref
      texlive.combined.scheme-full
