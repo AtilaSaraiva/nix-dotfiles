@@ -357,6 +357,7 @@ in
      dropbox
      megasync
      keepassxc
+     bitwarden
      kotatogram-desktop
      zathura
      font-manager
