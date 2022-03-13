@@ -312,16 +312,19 @@ in
      nix-prefetch-scripts
      qjackctl
      nox
-     #distrobox
+     distrobox
      cage
      binutils
      nixpkgs-fmt
+     nix-index
+     trash-cli
+
 
      # Image viewers
      feh
 
      # Compression
-     unstable.ouch
+     ouch
      unzip
      zpaq
 
@@ -338,7 +341,6 @@ in
      vifm-full
 
 
-
      # Python
      (let
         my-python-packages = python-packages: with python-packages; [
@@ -348,13 +350,14 @@ in
         python-with-my-packages = python3.withPackages my-python-packages;
      in
         python-with-my-packages)
-     micromamba
 
      # Apps
      onlyoffice-bin
      tdesktop
      dropbox
+     megasync
      keepassxc
+     kotatogram-desktop
      zathura
      font-manager
      gnome.gucharmap
@@ -375,12 +378,12 @@ in
      sayonara
      homebank
      droidmote
-     gimp
+     gimp-with-plugins
 
      # Gaming
      zeroad
+     minetest
      protonup
-     unstable.heroic
      lutris
      yuzu-ea
      unstable.rpcs3
