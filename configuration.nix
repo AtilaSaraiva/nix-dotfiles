@@ -318,6 +318,7 @@ in
      nixpkgs-fmt
      nix-index
      trash-cli
+     direnv
 
 
      # Image viewers
@@ -431,6 +432,8 @@ in
   };
 
   services.undervolt.gpuOffset = 50;
+
+  services.lorri.enable = true;
   services.locate = {
     enable = true;
     locate = pkgs.plocate;
