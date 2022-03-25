@@ -332,6 +332,10 @@ in
      archivemount
      fzf
      dragon-drop
+     poppler_utils
+     ffmpegthumbnailer
+     wkhtmltopdf
+     imagemagick
 
      # Image viewers
      feh
