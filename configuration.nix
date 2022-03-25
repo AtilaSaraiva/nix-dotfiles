@@ -323,11 +323,11 @@ in
      nixpkgs-fmt
      nix-index
      direnv
+     niv
 
      # lf
      trash-cli
      fasd
-     autojump
      chafa
      archivemount
      fzf
@@ -424,6 +424,7 @@ in
   programs.gamemode.enable = true;
   programs.file-roller.enable = true;
   programs.singularity.enable = true;
+  programs.autojump.enable = true;
 
   programs.zsh = {
     enable = true;
