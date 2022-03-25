@@ -154,6 +154,11 @@ in
   };
   xdg.portal.wlr.enable = true;
 
+  xdg.mime.defaultApplications = {
+    "application/pdf" = "zathura";
+    "image/png" = "feh";
+  };
+
 
   # Configure keymap in X11
   services.xserver.layout = "br";
@@ -317,9 +322,16 @@ in
      binutils
      nixpkgs-fmt
      nix-index
-     trash-cli
      direnv
 
+     # lf
+     trash-cli
+     fasd
+     autojump
+     chafa
+     archivemount
+     fzf
+     dragon-drop
 
      # Image viewers
      feh
