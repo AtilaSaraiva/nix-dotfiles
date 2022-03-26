@@ -37,6 +37,7 @@
 
     boot = {
       useOSProber = false;
+      extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
     };
 
     packages = {

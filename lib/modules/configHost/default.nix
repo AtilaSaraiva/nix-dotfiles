@@ -99,11 +99,11 @@ in
             default = 3;
           };
         };
-        extraModulePackages = mkOption {
-          description = "Kernel module packages";
-          type = types.listOf types.package;
-          default = [ ];
-        };
+      };
+      extraModulePackages = mkOption {
+        description = "Kernel module packages";
+        type = types.listOf types.package;
+        default = [ ];
       };
 
       useOSProber = mkEnableOption ''
@@ -202,9 +202,9 @@ in
     };
 
     boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
-    boot.loader.systemd-boot.enable = true;
+    boot.loader.systemd-boot.enable = cfg.boot.loader.systemdBoot.enable;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.timeout = cfg.boot.systemdBoot.timeout;
+    boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
     boot.kernel.sysctl = {
       "abi.vsyscall32" = 0;
       "vm.swappiness"  = 60;
