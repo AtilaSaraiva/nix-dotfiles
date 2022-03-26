@@ -113,6 +113,18 @@ in
         default = [ ];
       };
 
+      blacklistedKernelModules = mkOption {
+        description = "What modules to blacklist";
+        type = types.listOf types.str;
+        default = [ ];
+        example = [
+          "rtw88_8822ce"
+          "rtw88_8822c"
+          "rtw88_pci"
+          "rtw88_core"
+        ];
+      };
+
       useOSProber = mkEnableOption ''
         Whether to search for other operational systems for boot menu or not
       '';
@@ -272,6 +284,7 @@ in
     boot.consoleLogLevel = 0;
     boot.kernelPackages = pkgs.linuxPackages_zen;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
+    boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
     services.flatpak.enable = true;
     services.upower.enable = true;
@@ -610,8 +623,13 @@ in
 
     users.users = cfg.users.available;
 
+    services.logind.lidSwitch = "suspend-then-hibernate";
+
     networking = {
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        wifi.powersave = false;
+      };
 
       firewall = {
         enable = false;
