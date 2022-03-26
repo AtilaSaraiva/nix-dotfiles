@@ -4,33 +4,67 @@
 
 { config, pkgs, ... }:
 
-let
-  unstableTarball =
-      builtins.fetchGit {
-        name = "nixos-unstable";
-        url = "https://github.com/NixOS/nixpkgs/";
-        ref = "refs/heads/nixos-unstable";
-        rev = "062a0c5437b68f950b081bbfc8a699d57a4ee026";
-      };
-
-in
 {
-  nixpkgs.config.allowUnfree = true;
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [
       ./hardware-configuration.nix
-      #import ./modules/module-list.nix
-    ];
+  ];
+
+  hostConfig = {
+    enable = true;
+
+    machine = {
+      hostName = "JurosComposto";
+      stateVersion = "21.05";
+    };
+
+    isBtrfs = true;
+
+    users.available = {
+      atila = {
+         isNormalUser = true;
+         shell = pkgs.zsh;
+         extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
+         uid = 1001;
+      };
+      sabrina = {
+         isNormalUser = true;
+         createHome = true;
+         shell = pkgs.zsh;
+         extraGroups = [ "networkmanager" ]; # Enable ‘sudo’ for the user.
+         uid = 1002;
+      };
+    };
+
+    boot = {
+      useOSProber = false;
+    };
+
+    packages = {
+      extra = with pkgs; [
+        # Gaming
+        zeroad
+        minetest
+        protonup
+        lutris
+        yuzu-ea
+        unstable.rpcs3
+        pcsx2
+        wine64Packages.stagingFull
+        airshipper
+        steam-run
+        protontricks
+        multimc
+        unstable.cataclysm-dda
+        ryujinx
+        endgame-singularity
+      ];
+    };
+  };
 
   services.plex = {
     enable = true;
     user = "atila";
   };
-
-  nix.package = pkgs.nixUnstable;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
 
   services.snapper.configs = {
     home = {
@@ -43,168 +77,7 @@ in
     };
   };
 
-  services.flatpak.enable = true;
-
-  services.upower.enable = true;
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "monthly";
-    };
-
-  #systemd.services = {
-    #create-swapfile = {
-      #serviceConfig.Type = "oneshot";
-      #wantedBy = [ "swap-swapfile.swap" ];
-      #script = ''
-        #${pkgs.coreutils}/bin/truncate -s 0 /swap/swapfile
-        #${pkgs.e2fsprogs}/bin/chattr +C /swap/swapfile
-        #${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile compression none
-      #'';
-    #};
-  #};
-
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 3;
-  boot.kernel.sysctl = {
-    "abi.vsyscall32" = 0;
-    "vm.swappiness"  = 60;
-    "kernel.sysrq"   = 1;
-    };
-  boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
-  boot.tmpOnTmpfs = true;
-  boot.kernelParams = [ "quiet" "udev.log_level=3" ];
-
-  # Silent boot
-  boot.initrd.verbose = false;
-  boot.consoleLogLevel = 0;
-
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  #boot.extraModulePackages = [ pkgs.linuxPackages.rtl88xxau-aircrack ];
-  boot.extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
-  #boot.loader.grub.useOSProber = true;
-
-  security.pam.loginLimits = [
-    { domain = "*"; item = "memlock"; type = "hard"; value = "unlimited"; }
-    { domain = "*"; item = "memlock"; type = "soft"; value = "unlimited"; }
-  ];
-
-  networking.hostName = "JurosComposto"; # Define your hostname.
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/Bahia";
-
-  # Select internationalisation properties.
-   i18n.defaultLocale = "pt_BR.UTF-8";
-   console = {
-    font = "Lat2-Terminus16";
-    keyMap = "br-abnt2";
-  };
-
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.defaultSession = "sway";
-  services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.displayManager.autoLogin.enable = true;
-  #services.xserver.displayManager.autoLogin.user = "atila";
-
-  services.xserver.desktopManager.cinnamon.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-  #services.xserver.desktopManager.pantheon.enable = true;
-  #services.xserver.desktopManager.xfce.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
-
-  #programs.qt5ct.enable = true;
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true; # so that gtk works properly
-    extraPackages = with pkgs; [
-      swaylock
-      xwayland
-      swayidle
-      swaytools
-      wf-recorder
-      wl-clipboard
-      sway-contrib.grimshot
-      mako # notification daemon
-      alacritty # Alacritty is the default terminal in the config
-      wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
-      autotiling
-      waybar
-      wlsunset
-      xfce.thunar
-      jq
-      playerctl
-      wev
-      sirula
-      lxappearance
-      adapta-gtk-theme
-      gnome3.adwaita-icon-theme
-    ];
-    extraSessionCommands = ''
-      #export SDL_VIDEODRIVER=wayland
-      #export QT_QPA_PLATFORM=wayland
-      #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export MOZ_ENABLE_WAYLAND=1
-    '';
-  };
-  xdg.portal.wlr.enable = true;
-
-  xdg.mime.defaultApplications = {
-    "application/pdf" = "zathura";
-    "image/png" = "feh";
-  };
-
-
-  # Configure keymap in X11
-  services.xserver.layout = "br";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-  };
-  hardware.pulseaudio.enable = false;
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.atila = {
-     isNormalUser = true;
-     shell = pkgs.zsh;
-     extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
-     uid = 1001;
-  };
-  users.users.sabrina = {
-     isNormalUser = true;
-     createHome = true;
-     shell = pkgs.zsh;
-     extraGroups = [ "networkmanager" ]; # Enable ‘sudo’ for the user.
-     uid = 1002;
-  };
-
   virtualisation = {
-    podman = {
-      enable = true;
-      dockerCompat = true;
-    };
     waydroid = {
         enable = true;
     };
@@ -213,287 +86,12 @@ in
     };
   };
 
-  programs.dconf.enable = true;
-
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
-
-  hardware.opengl.extraPackages = with pkgs; [
-      rocm-opencl-icd
-      intel-compute-runtime
-      amdvlk
-      vaapiVdpau
-      libvdpau-va-gl
-      libva
-  ];
-
-  # To enable Vulkan support for 32-bit applications, also add:
-  hardware.opengl.extraPackages32 = [
-    pkgs.driversi686Linux.amdvlk
-  ];
-
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
-  fonts.fonts = with pkgs; [
-     font-awesome
-     cantarell-fonts
-     roboto-mono
-     fantasque-sans-mono
-     material-icons
-     nerdfonts
-  ];
-
-  hardware.steam-hardware.enable = true;
-  system.copySystemConfiguration = true;
-
-  nixpkgs.config = {
-    packageOverrides = pkgs: with pkgs; {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-        inherit pkgs;
-      };
-    };
-  };
-
   nixpkgs.overlays = [ (import ../../pkgs) ];
-
-  #nixpkgs.overlays = [
-    #(
-      #self: super:
-      #{
-        #rpcs3 = super.rpcs3.overrideAttrs (old: {
-          #src = super.fetchFromGitHub {
-            #owner = "RPCS3";
-            #repo = "rpcs3";
-            #rev = "fd0e7a4efa73a8c4afa10b974da75917337e0cb5";
-            #fetchSubmodules = true;
-            ##sha256 = "19padq5llvj2rk2g33im879gy15lk7xhjhvigjx0x8cqwlf1p3bb";
-            #hash = "sha256-4i8u54HstfkBaHLgtr+4H2WyoiEO/TfpP863Jmzx3P4=";
-          #};
-        #});
-      #}
-    #)
-  #];
-
-  environment.systemPackages = with pkgs; [
-     # Editor
-     neovim
-
-     # System tools
-     (pkgs.writeShellScriptBin "nixf" ''
-       exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
-     '')
-     wget
-     vulkan-tools
-     clinfo
-     killall
-     nmap
-     htop
-     pavucontrol
-     sshfs
-     exa
-     rofi
-     git
-     thefuck
-     udiskie
-     oguri
-     tmux
-     compsize
-     xorg.xhost
-     rpi-imager
-     ncdu
-     ripgrep
-     mate.pluma
-     rmlint
-     podman-compose
-     pacman
-     smartmontools
-     iotop
-     easyeffects
-     virt-manager
-     xfsprogs
-     libxfs
-     duf
-     radeontop
-     btdu
-     nix-prefetch-scripts
-     qjackctl
-     nox
-     distrobox
-     cage
-     binutils
-     nixpkgs-fmt
-     nix-index
-     direnv
-     niv
-
-     # lf
-     trash-cli
-     fasd
-     chafa
-     archivemount
-     fzf
-     dragon-drop
-     poppler_utils
-     ffmpegthumbnailer
-     wkhtmltopdf
-     imagemagick
-
-     # Image viewers
-     feh
-
-     # Compression
-     ouch
-     unzip
-     zpaq
-
-     # Browsers
-     firefox-wayland
-     qutebrowser
-     google-chrome
-
-     # Database
-     sqlite
-     dbeaver
-
-     # File Browsers
-     vifm-full
-
-
-     # Python
-     (let
-        my-python-packages = python-packages: with python-packages; [
-            pynvim
-         #other python packages you want
-        ];
-        python-with-my-packages = python3.withPackages my-python-packages;
-     in
-        python-with-my-packages)
-
-     # Apps
-     onlyoffice-bin
-     tdesktop
-     dropbox
-     megasync
-     keepassxc
-     bitwarden
-     kotatogram-desktop
-     zathura
-     font-manager
-     gnome.gucharmap
-     mpv
-     buku
-     unstable.oil-buku
-     libsForQt5.okular
-     jabref
-     texlive.combined.scheme-full
-     qbittorrent
-     xournalpp
-     obs-studio
-     inkscape
-     blanket
-     libreoffice-fresh
-     element-desktop
-     youtube-dl
-     sayonara
-     homebank
-     droidmote
-     gimp-with-plugins
-
-     # Gaming
-     zeroad
-     minetest
-     protonup
-     lutris
-     yuzu-ea
-     unstable.rpcs3
-     pcsx2
-     wine64Packages.stagingFull
-     airshipper
-     steam-run
-     protontricks
-     multimc
-     unstable.cataclysm-dda
-     ryujinx
-     endgame-singularity
-     nur.repos.dukzcry.gamescope
-   ];
-
-
-  programs.neovim.viAlias = true;
-  programs.neovim.vimAlias = true;
-  environment.variables.EDITOR = "nvim";
-  programs.gamemode.enable = true;
-  programs.file-roller.enable = true;
-  programs.singularity.enable = true;
-  programs.autojump.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      rebuild-os = "sudo nixos-rebuild switch";
-      upgrade-os = ''
-        sudo nixos-rebuild --upgrade
-        echo "Please reboot"
-      '';
-      edit-os = "nvim /etc/nixos/configuration.nix";
-      gc-os = "nix-collect-garbage -d";
-    };
-    shellInit = ''
-        source /home/atila/.config/shell/shenv
-    '';
-  };
-
-
-  programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-  };
 
   services.undervolt.gpuOffset = 50;
 
-  services.lorri.enable = true;
-  services.locate = {
-    enable = true;
-    locate = pkgs.plocate;
-    localuser = "atila";
-    pruneBindMounts = false;
-  };
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-      enable = true;
-      ports = [
-        22
-        35901
-      ];
-  };
-
-  networking.firewall.enable = false;
-
-  zramSwap = {
-    enable = true;
-    priority = 32000;
-    algorithm = "zstd";
-    memoryPercent = 90;
-  };
-  nix.autoOptimiseStore = true;
-  nix.gc = {
-      automatic = true;
-      persistent = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-  };
   system.autoUpgrade.enable = true;
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
-
 }

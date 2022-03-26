@@ -19,14 +19,14 @@ in
       timeZone = mkOption {
         type = with types; uniq str;
         description = "Host time zone";
-        default = "Brazil/East";
+        default = "America/Bahia";
         example = "TODO";
       };
 
       locale = mkOption {
         type = with types; uniq str;
         description = "Host locale";
-        default = "en_US.UTF-8";
+        default = "pt_BR.UTF-8";
         example = "TODO";
       };
 
@@ -62,14 +62,6 @@ in
           };
         };
       };
-
-      defaultUserShell = mkOption {
-        type = with types; package;
-        description = "Default user shell";
-        default = pkgs.zsh;
-        example = pkgs.bash;
-      };
-
     };
 
     boot = {
@@ -192,26 +184,13 @@ in
           };
         };
       };
-      network = {
-        interfaces = mkOption {
-          description = "Network interfaces";
-          type = with types; listOf str ;
-          default = [ ];
-          example = [ "enp2s0" "wlp3s0" ];
-        };
-        useDHCP = mkOption {
-          description = "Whether to use DHCP or not";
-          type = with types; bool;
-          default = true;
-          example = false;
-        };
-      };
     };
-
   };
 
 
   config = mkIf cfg.enable {
+
+    nixpkgs.config.allowUnfree = true;
 
     networking.hostName = cfg.machine.hostName;
     time.timeZone = cfg.machine.timeZone;
@@ -396,7 +375,6 @@ in
 
     programs.gamemode.enable = true;
     programs.file-roller.enable = true;
-    programs.singularity.enable = true;
     programs.autojump.enable = true;
 
     programs.zsh = {
@@ -431,7 +409,7 @@ in
       vimAlias = true;
     };
 
-    i18n.defaultLocale = "pt_BR.UTF-8";
+    i18n.defaultLocale = cfg.machine.locale;
 
     services.lorri.enable = true;
     services.locate = {
@@ -483,8 +461,7 @@ in
         wl-clipboard
         sway-contrib.grimshot
         mako # notification daemon
-        alacritty # Alacritty is the default terminal in the config
-        wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
+        kitty # Alacritty is the default terminal in the config
         autotiling
         waybar
         wlsunset
@@ -528,11 +505,6 @@ in
     };
 
     users.users = cfg.users.available;
-    users.defaultUserShell = cfg.users.defaultUserShell;
-
-    #users.extraGroups = {
-    #   vboxusers.members = [ "marcosrdac" ];
-    #};
 
     networking = {
       networkmanager.enable = true;
@@ -566,7 +538,6 @@ in
 
     hardware.opengl.extraPackages = with pkgs; [
         rocm-opencl-icd
-        intel-compute-runtime
         amdvlk
         vaapiVdpau
         libvdpau-va-gl
@@ -577,6 +548,7 @@ in
     hardware.opengl.extraPackages32 = [
       pkgs.driversi686Linux.amdvlk
     ];
+
     services.btrfs.autoScrub = {
       enable = cfg.isBtrfs;
       interval = "monthly";
