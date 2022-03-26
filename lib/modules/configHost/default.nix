@@ -103,7 +103,6 @@ in
 
       kernelPackage = mkOption {
         description = "The linux kernel package";
-        type = types.listOf types.package;
         default = pkgs.linuxPackages_zen;
       };
 
@@ -282,7 +281,7 @@ in
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    boot.kernelPackages = pkgs.linuxPackages_zen;
+    boot.kernelPackages = cfg.boot.kernelPackage;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
