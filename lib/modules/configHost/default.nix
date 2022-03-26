@@ -426,7 +426,6 @@ in
         # Gaming
         zeroad
         minetest
-        protonup
         lutris
         yuzu-ea
         unstable.rpcs3
@@ -435,7 +434,6 @@ in
         airshipper
         steam-run
         protontricks
-        multimc
         unstable.cataclysm-dda
         ryujinx
         endgame-singularity
