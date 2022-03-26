@@ -13,7 +13,7 @@ in
       hostName = mkOption {
         type = with types; uniq str;
         description = "Host name";
-        example = "marcos-desktop";
+        example = "atila-desktop";
       };
 
       timeZone = mkOption {
@@ -38,22 +38,26 @@ in
       };
     };
 
+    isBtrfs = mkEnableOption ''
+      Does the system contain a btrfs partition?
+    '';
+
     users = {
       available = mkOption {
         type = with types; attrs;
         description = "Set of users for the machine";
         default = {
-          "marcosrdac" = {
+          "atila" = {
             isNormalUser = true;
             extraGroups = [ "wheel" ];
           };
         };
         example = {
-          "marcos" = {
+          "atila" = {
             isNormalUser = true;
             extraGroups = [ "wheel" ];
           };
-          "family" = {
+          "sabrina" = {
             isNormalUser = true;
           };
         };
@@ -91,8 +95,23 @@ in
           };
         };
 
-        efi = { };
-
+        systemdBoot = {
+          enable = mkOption {
+            description = "Systemd boot";
+            type = with types; bool;
+            default = true;
+          };
+          timeout = mkOption {
+            description = "Wait time for boot menu selection";
+            type = with types; nullOr int;
+            default = 3;
+          };
+        };
+        extraModulePackages = mkOption {
+          description = "Kernel module packages";
+          type = types.listOf types.package;
+          default = [ ];
+        };
       };
 
       useOSProber = mkEnableOption ''
@@ -150,13 +169,13 @@ in
           xkbLayout = mkOption {
             description = "";
             type = with types; str;
-            default = "us";
+            default = "br";
             example = "us";
           };
           xkbVariant = mkOption {
             description = "";
             type = with types; str;
-            default = "intl";
+            default = "";
             example = "intl";
           };
           xkbOptions = mkOption {
@@ -168,7 +187,7 @@ in
           ttyLayout = mkOption {
             description = "";
             type = with types; str;
-            default = "us";
+            default = "br-abnt2";
             example = "us";
           };
         };
@@ -203,79 +222,170 @@ in
       extraOptions = ''experimental-features = nix-command flakes'';
     };
 
-    boot.loader = let
-        loaders = rec {
-          portable = {
-            grub = {
-              device = cfg.boot.loader.portable.device;
-              efiSupport = true;
-              efiInstallAsRemovable = true;
-              useOSProber = cfg.boot.useOSProber;
-            };
-            efi.efiSysMountPoint = cfg.boot.loader.portable.efiSysMountPoint;
-          };
-          efi = { };  # TODO make it grubby
-          default = efi;
-        };
-      in (
-        if (cfg.boot.loader.portable.enable)
-        then loaders.portable
-        else loaders.default
-      );
     boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.timeout = cfg.boot.systemdBoot.timeout;
+    boot.kernel.sysctl = {
+      "abi.vsyscall32" = 0;
+      "vm.swappiness"  = 60;
+      "kernel.sysrq"   = 1;
+      };
+    boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
+    boot.kernelParams = [ "quiet" "udev.log_level=3" ];
+    # Silent boot
+    boot.initrd.verbose = false;
+    boot.consoleLogLevel = 0;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
+    boot.extraModulePackages = cfg.boot.extraModulePackages;
 
+    services.flatpak.enable = true;
+    services.upower.enable = true;
+
+    security.pam.loginLimits = [
+      { domain = "*"; item = "memlock"; type = "hard"; value = "unlimited"; }
+      { domain = "*"; item = "memlock"; type = "soft"; value = "unlimited"; }
+    ];
 
     environment.systemPackages = with pkgs; let
       defaultPackages = [
-        unstable.home-manager
-        #home-manager # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
+        # Editor
+        neovim
 
-        lf
-        vim neovim
-	tmux
-	alacritty
+        # System tools
+        (pkgs.writeShellScriptBin "nixf" ''
+          exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
+        '')
+        wget
+        vulkan-tools
+        clinfo
+        killall
+        nmap
+        htop
+        pavucontrol
+        sshfs
+        exa
+        rofi
+        git
+        thefuck
+        udiskie
+        oguri
+        tmux
+        compsize
+        xorg.xhost
+        rpi-imager
+        ncdu
+        ripgrep
+        mate.pluma
+        rmlint
+        podman-compose
+        pacman
+        smartmontools
+        iotop
+        easyeffects
+        virt-manager
+        xfsprogs
+        libxfs
+        duf
+        radeontop
+        btdu
+        nix-prefetch-scripts
+        qjackctl
+        nox
+        distrobox
+        cage
+        binutils
+        nixpkgs-fmt
+        nix-index
+        direnv
+        niv
 
-        git wget
-        busybox  #=: lspci
+        # lf
+        trash-cli
+        fasd
+        chafa
+        archivemount
+        fzf
+        dragon-drop
+        poppler_utils
+        ffmpegthumbnailer
+        wkhtmltopdf
+        imagemagick
 
-        firefox
+        # Image viewers
+        feh
 
-        keepassx2
-      ];
-      designPackages = [
-        gimp
+        # Compression
+        ouch
+        unzip
+        zpaq
+
+        # Browsers
+        firefox-wayland
+        qutebrowser
+        google-chrome
+
+        # Database
+        sqlite
+        dbeaver
+
+        # File Browsers
+        vifm-full
+
+
+        # Python
+        (let
+           my-python-packages = python-packages: with python-packages; [
+               pynvim
+            #other python packages you want
+           ];
+           python-with-my-packages = python3.withPackages my-python-packages;
+        in
+           python-with-my-packages)
+
+        # Apps
+        onlyoffice-bin
+        tdesktop
+        dropbox
+        megasync
+        keepassxc
+        bitwarden
+        kotatogram-desktop
+        zathura
+        font-manager
+        gnome.gucharmap
+        mpv
+        buku
+        unstable.oil-buku
+        libsForQt5.okular
+        jabref
+        texlive.combined.scheme-full
+        qbittorrent
+        xournalpp
+        obs-studio
         inkscape
+        blanket
+        libreoffice-fresh
+        element-desktop
+        youtube-dl
+        sayonara
+        homebank
+        droidmote
+        gimp-with-plugins
       ];
       in
         (if cfg.packages.useDefault
           then defaultPackages
           else [ ])
-        ++ designPackages
         ++ cfg.packages.extra;
 
 
     services.xserver = {
       enable = true;
-      autorun = true;
-      exportConfiguration = true;
 
-      displayManager.lightdm = {
-        enable = true;
-	#background = "";
-        #extraSeatDefaults = "";
-      };
+      displayManager.gdm.enable = true;
 
-      desktopManager.xfce.enable = true;
-
-      desktopManager.session = [
-        {
-          name = "home-manager";
-          start = ''
-            ${pkgs.runtimeShell} $HOME/.hm-xsession &
-            waitPID=$!
-          '';
-        }
-      ];
+      desktopManager.cinnamon.enable = true;
 
       libinput.enable = true;
 
@@ -284,6 +394,26 @@ in
       xkbOptions = cfg.devices.input.keyboard.xkbOptions;
     };
 
+    programs.gamemode.enable = true;
+    programs.file-roller.enable = true;
+    programs.singularity.enable = true;
+    programs.autojump.enable = true;
+
+    programs.zsh = {
+      enable = true;
+      shellAliases = {
+        rebuild-os = "sudo nixos-rebuild switch";
+        upgrade-os = ''
+          sudo nixos-rebuild --upgrade
+          echo "Please reboot"
+        '';
+        edit-os = "nvim /etc/nixos/configuration.nix";
+        gc-os = "nix-collect-garbage -d";
+      };
+      shellInit = ''
+          source /home/atila/.config/shell/shenv
+      '';
+    };
 
     environment.variables = let
       defaultVariables = {
@@ -301,83 +431,104 @@ in
       vimAlias = true;
     };
 
-    i18n.defaultLocale = "en_US.UTF-8";
+    i18n.defaultLocale = "pt_BR.UTF-8";
 
-
-    console.font = "Lat2-Terminus16";
-
-    fonts = {
-      fontDir.enable = true;
-      fonts = with pkgs; [
-        spleen
-        #noto-fonts
-        #noto-fonts-cjk
-        #noto-fonts-emoji
-        #liberation_ttf
-        #fira-code
-        #fira-code-symbols
-        #mplus-outline-fonts
-        #dina-font
-        #proggyfonts
-        #source-sans-pro
-        #source-serif-pro
-        #noto-fonts-emoji
-        #corefonts
-        #recursive
-      ];
-
-      fontconfig = {
-        defaultFonts = {
-          serif = [ "Recursive Sans Casual Static Medium" ];
-          sansSerif = [ "Recursive Sans Linear Static Medium" ];
-          monospace = [ "Recursive Mono Linear Static" ];
-          emoji = [ "Noto Color Emoji" ];
-        };
-
-        localConf = ''
-          <?xml version="1.0"?>
-          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-          <fontconfig>
-            <alias binding="weak">
-              <family>monospace</family>
-              <prefer>
-                <family>emoji</family>
-              </prefer>
-            </alias>
-            <alias binding="weak">
-              <family>sans-serif</family>
-              <prefer>
-                <family>emoji</family>
-              </prefer>
-            </alias>
-            <alias binding="weak">
-              <family>serif</family>
-              <prefer>
-                <family>emoji</family>
-              </prefer>
-            </alias>
-          </fontconfig>
-        '';
-      };
+    services.lorri.enable = true;
+    services.locate = {
+      enable = true;
+      locate = pkgs.plocate;
+      localuser = "atila";
+      pruneBindMounts = false;
     };
 
-    console.keyMap = cfg.devices.input.keyboard.ttyLayout;
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = cfg.devices.input.keyboard.ttyLayout;
+    };
 
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    fonts = {
+      fonts = with pkgs; [
+       font-awesome
+       cantarell-fonts
+       roboto-mono
+       fantasque-sans-mono
+       material-icons
+       nerdfonts
+      ];
+    };
+
+    zramSwap = {
+      enable = true;
+      priority = 32000;
+      algorithm = "zstd";
+      memoryPercent = 90;
+    };
+    nix.autoOptimiseStore = true;
+    nix.gc = {
+        automatic = true;
+        persistent = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+    };
+
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true; # so that gtk works properly
+      extraPackages = with pkgs; [
+        swaylock
+        xwayland
+        swayidle
+        swaytools
+        wf-recorder
+        wl-clipboard
+        sway-contrib.grimshot
+        mako # notification daemon
+        alacritty # Alacritty is the default terminal in the config
+        wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
+        autotiling
+        waybar
+        wlsunset
+        xfce.thunar
+        jq
+        playerctl
+        wev
+        sirula
+        lxappearance
+        adapta-gtk-theme
+        gnome3.adwaita-icon-theme
+      ];
+      extraSessionCommands = ''
+        #export SDL_VIDEODRIVER=wayland
+        #export QT_QPA_PLATFORM=wayland
+        #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
+      '';
+    };
+    xdg.portal.wlr.enable = true;
+
     services.printing.enable = true;
+
+    xdg.mime.defaultApplications = {
+      "application/pdf" = "zathura";
+      "image/png" = "feh";
+    };
 
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
 
-    services.openssh.enable = true;
+    services.openssh = {
+        enable = true;
+        ports = [
+          22
+          35901
+        ];
+    };
 
     users.users = cfg.users.available;
     users.defaultUserShell = cfg.users.defaultUserShell;
-
-    nix.allowedUsers = builtins.attrNames cfg.users.available;  # all of them
 
     #users.extraGroups = {
     #   vboxusers.members = [ "marcosrdac" ];
@@ -386,28 +537,54 @@ in
     networking = {
       networkmanager.enable = true;
 
-      interfaces = listToAttrs ( map (
-        n: { name = "${n}"; value = { useDHCP = cfg.devices.network.useDHCP; }; }
-      ) cfg.devices.network.interfaces);
-
-      proxy = {
-        #default = "http://user:password@proxy:port/";
-        #noProxy = "127.0.0.1,localhost,internal.domain";
-      };
-
       firewall = {
         enable = false;
         #allowedTCPPorts = [ ... ];
         #allowedUDPPorts = [ ... ];
       };
-
-      extraHosts = ''
-        # Public
-        #IP.ADDR hostname
-        # VPN protected services
-        #IP.ADDR hostname
-      '';
     };
 
+    # Enable sound.
+    sound.enable = true;
+    services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        jack.enable = true;
+    };
+    hardware.pulseaudio.enable = false;
+
+    hardware.bluetooth.enable = true;
+    services.blueman.enable = true;
+    virtualisation = {
+      podman = {
+        enable = true;
+        dockerCompat = true;
+      };
+    };
+
+    hardware.opengl.extraPackages = with pkgs; [
+        rocm-opencl-icd
+        intel-compute-runtime
+        amdvlk
+        vaapiVdpau
+        libvdpau-va-gl
+        libva
+    ];
+    hardware.steam-hardware.enable = true;
+
+    hardware.opengl.extraPackages32 = [
+      pkgs.driversi686Linux.amdvlk
+    ];
+    services.btrfs.autoScrub = {
+      enable = cfg.isBtrfs;
+      interval = "monthly";
+    };
+
+    programs.dconf.enable = true;
+
+    hardware.opengl.enable = true;
+    hardware.opengl.driSupport32Bit = true;
   };
 }
