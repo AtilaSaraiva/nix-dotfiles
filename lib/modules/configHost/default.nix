@@ -137,7 +137,7 @@ in
     enablePlex = mkOption {
       description = "Do you want to enable plex?";
       type = types.bool;
-      default = false;
+      default = !cfg.isLaptop;
       example = true;
     };
 
@@ -176,7 +176,14 @@ in
         default = true;
         example = false;
       };
-
+      useDefaultGaming = mkOption {
+        description = ''
+          Whether to use default gaming packages or not
+        '';
+        type = with types; bool;
+        default = false;
+        example = true;
+      };
       extra = mkOption {
         description = "Extra packages";
         type = with types; listOf package;
@@ -341,6 +348,7 @@ in
         imv
 
         # lf
+        lf
         trash-cli
         fasd
         chafa
@@ -413,9 +421,31 @@ in
         droidmote
         gimp-with-plugins
       ];
+
+      defaultGaming = [
+        # Gaming
+        zeroad
+        minetest
+        protonup
+        lutris
+        yuzu-ea
+        unstable.rpcs3
+        pcsx2
+        wine64Packages.stagingFull
+        airshipper
+        steam-run
+        protontricks
+        multimc
+        unstable.cataclysm-dda
+        ryujinx
+        endgame-singularity
+      ];
       in
         (if cfg.packages.useDefault
           then defaultPackages
+          else [ ])
+        ++ (if cfg.packages.useDefaultGaming
+          then defaultGaming
           else [ ])
         ++ cfg.packages.extra;
 

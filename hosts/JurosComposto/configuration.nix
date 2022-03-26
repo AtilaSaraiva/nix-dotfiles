@@ -43,24 +43,7 @@
     };
 
     packages = {
-      extra = with pkgs; [
-        # Gaming
-        zeroad
-        minetest
-        protonup
-        lutris
-        yuzu-ea
-        unstable.rpcs3
-        pcsx2
-        wine64Packages.stagingFull
-        airshipper
-        steam-run
-        protontricks
-        multimc
-        unstable.cataclysm-dda
-        ryujinx
-        endgame-singularity
-      ];
+      useDefaultGaming = true;
     };
 
     snapperExtraDir = {
