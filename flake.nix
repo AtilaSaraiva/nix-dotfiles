@@ -46,4 +46,6 @@
       nixosConfigurations = builtins.mapAttrs
         (host: config: mkHost config) hostsConfigs;
     };
-  }
+}
+
+

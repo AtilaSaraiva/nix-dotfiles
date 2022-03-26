@@ -18,6 +18,7 @@
     };
 
     isBtrfs = true;
+    enablePlex = true;
 
     users.available = {
       atila = {
@@ -37,6 +38,7 @@
 
     boot = {
       useOSProber = false;
+      kernelPackage = pkgs.linuxPackages_zen;
       extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
     };
 
@@ -60,21 +62,32 @@
         endgame-singularity
       ];
     };
-  };
 
-  services.plex = {
-    enable = true;
-    user = "atila";
-  };
-
-  services.snapper.configs = {
-    home = {
-      subvolume = "/home";
-      extraConfig = ''
-        ALLOW_USERS="atila"
-        TIMELINE_CREATE=yes
-        TIMELINE_CLEANUP=yes
-      '';
+    snapperExtraDir = {
+      documentos = {
+        subvolume = "/home/atila/Files/Documentos/";
+        extraConfig = ''
+          ALLOW_USERS="atila"
+          TIMELINE_CREATE=yes
+          TIMELINE_CLEANUP=yes
+        '';
+      };
+      imagens = {
+        subvolume = "/home/atila/Files/Imagens/";
+        extraConfig = ''
+          ALLOW_USERS="atila"
+          TIMELINE_CREATE=yes
+          TIMELINE_CLEANUP=yes
+        '';
+      };
+      codes = {
+        subvolume = "/home/atila/Files/Códigos/";
+        extraConfig = ''
+          ALLOW_USERS="atila"
+          TIMELINE_CREATE=yes
+          TIMELINE_CLEANUP=yes
+        '';
+      };
     };
   };
 
@@ -89,10 +102,4 @@
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
-
-  nixpkgs.overlays = [ (import ../../pkgs) ];
-
-  services.undervolt.gpuOffset = 50;
-
-  system.autoUpgrade.enable = true;
 }

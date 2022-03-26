@@ -100,6 +100,13 @@ in
           };
         };
       };
+
+      kernelPackage = mkOption {
+        description = "The linux kernel package";
+        type = types.listOf types.package;
+        default = pkgs.linuxPackages_zen;
+      };
+
       extraModulePackages = mkOption {
         description = "Kernel module packages";
         type = types.listOf types.package;
@@ -117,6 +124,46 @@ in
         type = with types; bool;
         default = true;
         example = false;
+      };
+    };
+
+    isLaptop = mkOption {
+      description = "Enable laptop optimizations?";
+      type = with types; bool;
+      default = false;
+      example = true;
+    };
+
+    enablePlex = mkOption {
+      description = "Do you want to enable plex?";
+      type = types.bool;
+      default = false;
+      example = true;
+    };
+
+    enableJellyfin = mkOption {
+      description = "Do you want to enable jellyfin?";
+      type = types.bool;
+      default = false;
+      example = true;
+    };
+
+    snapperExtraDir = mkOption {
+      description = ''
+        Additional directories to tell snapper to take snapshots of. Home is set by default, any
+        dir set with this option will only be added to the list
+      '';
+      type = with types; attrs;
+      default = { };
+      example = {
+        home = {
+          subvolume = "/home";
+          extraConfig = ''
+            ALLOW_USERS="atila"
+            TIMELINE_CREATE=yes
+            TIMELINE_CLEANUP=yes
+          '';
+        };
       };
     };
 
@@ -190,6 +237,7 @@ in
 
   config = mkIf cfg.enable {
 
+    nixpkgs.overlays = [ (import ../../../pkgs) ];
     nixpkgs.config.allowUnfree = true;
 
     networking.hostName = cfg.machine.hostName;
@@ -220,6 +268,16 @@ in
 
     services.flatpak.enable = true;
     services.upower.enable = true;
+
+    services.plex = {
+      enable = cfg.enablePlex;
+      user = "atila";
+    };
+
+    services.jellyfin = {
+      enable = cfg.enableJellyfin;
+      user = "atila";
+    };
 
     security.pam.loginLimits = [
       { domain = "*"; item = "memlock"; type = "hard"; value = "unlimited"; }
@@ -278,6 +336,9 @@ in
         nix-index
         direnv
         niv
+        file
+        cheat
+        imv
 
         # lf
         trash-cli
@@ -411,13 +472,28 @@ in
 
     i18n.defaultLocale = cfg.machine.locale;
 
+    services.auto-cpufreq.enable = cfg.isLaptop;
+
     services.lorri.enable = true;
     services.locate = {
       enable = true;
-      locate = pkgs.plocate;
       localuser = "atila";
       pruneBindMounts = false;
     };
+
+    services.snapper.configs =
+      let default = {
+        home = {
+          subvolume = "/home";
+          extraConfig = ''
+            ALLOW_USERS="atila"
+            TIMELINE_CREATE=yes
+            TIMELINE_CLEANUP=yes
+          '';
+        };
+      };
+      in
+        default // cfg.snapperExtraDir;
 
     console = {
       font = "Lat2-Terminus16";
@@ -536,7 +612,7 @@ in
       };
     };
 
-    hardware.opengl.extraPackages = with pkgs; [
+    hardware.opengl.extraPackages = with pkgs; [ # TODO: create an option for amdgpus
         rocm-opencl-icd
         amdvlk
         vaapiVdpau
@@ -558,5 +634,6 @@ in
 
     hardware.opengl.enable = true;
     hardware.opengl.driSupport32Bit = true;
+    services.undervolt.gpuOffset = 50;
   };
 }
