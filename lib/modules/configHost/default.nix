@@ -547,7 +547,6 @@ in
        roboto-mono
        fantasque-sans-mono
        material-icons
-       nerdfonts
       ];
     };
 
