@@ -13,12 +13,13 @@
     enable = true;
 
     machine = {
-      hostName = "JurosComposto";
+      hostName = "kojiro";
       stateVersion = "21.11";
     };
 
     isBtrfs = true;
     enablePlex = false;
+    isLaptop = true;
 
     users.available = {
       atila = {
