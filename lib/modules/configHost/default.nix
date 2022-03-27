@@ -268,6 +268,7 @@ in
     };
 
     boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
+    boot.cleanTmpDir = !cfg.boot.tmpOnTmpfs;
     boot.loader.systemd-boot.enable = cfg.boot.loader.systemdBoot.enable;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
@@ -567,7 +568,8 @@ in
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
-      extraPackages = with pkgs; [
+      extraPackages = with pkgs; let
+        defaultPackages = [
         swaylock
         xwayland
         swayidle
@@ -589,6 +591,13 @@ in
         adapta-gtk-theme
         gnome3.adwaita-icon-theme
       ];
+      laptopPackages = [
+        brightnessctl
+        acpi
+      ];
+      in
+      (if cfg.isLaptop then laptopPackages else [ ])
+      ++ defaultPackages;
       extraSessionCommands = ''
         #export SDL_VIDEODRIVER=wayland
         #export QT_QPA_PLATFORM=wayland

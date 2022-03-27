@@ -47,6 +47,7 @@
         "rtw88_pci"
         "rtw88_core"
       ];
+      tmpOnTmpfs = false;
     };
 
     packages = {
