@@ -433,6 +433,7 @@ in
         homebank
         droidmote
         gimp-with-plugins
+        obsidian
       ];
 
       defaultGaming = [
