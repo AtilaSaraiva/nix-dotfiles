@@ -411,7 +411,7 @@ in
         megasync
         keepassxc
         bitwarden
-        kotatogram-desktop
+        unstable.kotatogram-desktop
         zathura
         font-manager
         gnome.gucharmap
