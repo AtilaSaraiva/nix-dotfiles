@@ -633,6 +633,12 @@ in
 
     services.logind.lidSwitch = "suspend-then-hibernate";
 
+    services.earlyoom = {
+      enable = true;
+      useKernelOOMKiller = true;
+      enableNotifications = true;
+    };
+
     networking = {
       networkmanager = {
         enable = true;
