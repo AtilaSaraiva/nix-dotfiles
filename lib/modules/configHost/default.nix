@@ -695,6 +695,8 @@ in
 
     hardware.opengl.enable = true;
     hardware.opengl.driSupport32Bit = true;
-    services.undervolt.gpuOffset = 50;
+    #services.undervolt.gpuOffset = 50;
+    programs.corectrl.enable = true;
+    programs.corectrl.gpuOverclock.enable = true;
   };
 }
