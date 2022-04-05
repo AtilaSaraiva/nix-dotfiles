@@ -591,6 +591,7 @@ in
         lxappearance
         adapta-gtk-theme
         gnome.adwaita-icon-theme
+        wdisplays
       ];
       laptopPackages = [
         brightnessctl
