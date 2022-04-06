@@ -451,6 +451,7 @@ in
         unstable.cataclysm-dda
         ryujinx
         endgame-singularity
+        mangohud
       ];
       in
         (if cfg.packages.useDefault

@@ -56,6 +56,7 @@
         zeroad
         minetest
         lutris
+        mangohud
       ];
     };
 
