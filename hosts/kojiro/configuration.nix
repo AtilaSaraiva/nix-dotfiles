@@ -57,6 +57,7 @@
         minetest
         lutris
         mangohud
+        amdgpu-fan
       ];
     };
 
