@@ -380,6 +380,7 @@ in
         ouch
         unzip
         zpaq
+        p7zip
 
         # Browsers
         firefox-wayland
