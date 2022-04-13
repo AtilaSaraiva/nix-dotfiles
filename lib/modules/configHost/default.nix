@@ -272,6 +272,7 @@ in
     boot.loader.systemd-boot.enable = cfg.boot.loader.systemdBoot.enable;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
+    boot.loader.systemd-boot.memtest86.enable = true;
     boot.kernel.sysctl = {
       "abi.vsyscall32" = 0;
       "vm.swappiness"  = 60;

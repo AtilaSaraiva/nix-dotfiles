@@ -19,6 +19,7 @@ in {
         - [0, 0]
         - [40, 40]
         - [60, 60]
+        - [70, 70]
         - [80, 90]
 
         # optional
@@ -39,7 +40,7 @@ in {
       restartTriggers = [ config.environment.etc."amdgpu-fan.yml".source ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.amdgpu-fan}/bin/amdgpu-fan -f${verbose}";
+        ExecStart = "${pkgs.amdgpu-fan}/bin/amdgpu-fan";
         Restart = "always";
       };
     };
