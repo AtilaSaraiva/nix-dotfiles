@@ -569,6 +569,12 @@ in
         options = "--delete-older-than 30d";
     };
 
+    system.autoUpgrade = {
+      enable = true;
+      flake = "github:AtilaSaraiva/nix-dotfiles";
+      dates = "13:00";
+    };
+
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
