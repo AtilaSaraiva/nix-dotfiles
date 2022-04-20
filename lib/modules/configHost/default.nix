@@ -436,6 +436,7 @@ in
         droidmote
         gimp-with-plugins
         obsidian
+        unstable.irpf
       ];
 
       defaultGaming = [
