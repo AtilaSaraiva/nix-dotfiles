@@ -3,8 +3,9 @@
 
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
   };
 
 
@@ -31,8 +32,14 @@
           config.allowUnfree = true;
         };
       };
+      unstable-small-overlay = final: prev: {  # TODO: define these on ./lib/overlays
+        unstableSmall = import inputs.nixpkgs-unstable-small {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+      };
       overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay ]; })
+        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay ]; })
       ];
 
       mkHost = hostConfig:
@@ -47,5 +54,3 @@
         (host: config: mkHost config) hostsConfigs;
     };
 }
-
-

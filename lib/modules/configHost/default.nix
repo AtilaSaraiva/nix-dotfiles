@@ -368,7 +368,7 @@ in
         chafa
         archivemount
         fzf
-        dragon-drop
+        xdragon
         poppler_utils
         ffmpegthumbnailer
         wkhtmltopdf
@@ -386,7 +386,7 @@ in
         # Browsers
         firefox-wayland
         qutebrowser
-        google-chrome
+        unstableSmall.google-chrome
 
         # Database
         sqlite
@@ -646,7 +646,6 @@ in
 
     services.earlyoom = {
       enable = true;
-      useKernelOOMKiller = true;
       enableNotifications = true;
     };
 
@@ -671,6 +670,7 @@ in
         alsa.support32Bit = true;
         pulse.enable = true;
         jack.enable = true;
+        wireplumber.enable = true;
     };
     hardware.pulseaudio.enable = false;
 
