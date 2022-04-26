@@ -275,7 +275,7 @@ in
     boot.loader.systemd-boot.memtest86.enable = true;
     boot.kernel.sysctl = {
       "abi.vsyscall32" = 0;
-      "vm.swappiness"  = 60;
+      "vm.swappiness"  = 7;
       "kernel.sysrq"   = 1;
       };
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
@@ -355,11 +355,14 @@ in
         binutils
         nixpkgs-fmt
         nix-index
+        nix-update
+        nixpkgs-review
         direnv
         niv
         file
         cheat
         imv
+        rssguard
 
         # lf
         lf
@@ -387,6 +390,7 @@ in
         firefox-wayland
         qutebrowser
         unstableSmall.google-chrome
+        brave
 
         # Database
         sqlite
@@ -670,7 +674,7 @@ in
         alsa.support32Bit = true;
         pulse.enable = true;
         jack.enable = true;
-        wireplumber.enable = true;
+        #wireplumber.enable = true;
     };
     hardware.pulseaudio.enable = false;
 
