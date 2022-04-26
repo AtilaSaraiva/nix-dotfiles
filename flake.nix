@@ -6,6 +6,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-2105.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
   };
 
 
@@ -38,8 +40,20 @@
           config.allowUnfree = true;
         };
       };
+      release-2105-overlay = final: prev: {  # TODO: define these on ./lib/overlays
+        release2105 = import inputs.nixpkgs-2105 {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+      };
+      master-overlay = final: prev: {  # TODO: define these on ./lib/overlays
+        master = import inputs.nixpkgs-master {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+      };
       overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay ]; })
+        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay release-2105-overlay master-overlay ]; })
       ];
 
       mkHost = hostConfig:

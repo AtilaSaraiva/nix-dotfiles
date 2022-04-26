@@ -389,7 +389,7 @@ in
         # Browsers
         firefox-wayland
         qutebrowser
-        unstableSmall.google-chrome
+        release2105.google-chrome
         brave
 
         # Database
