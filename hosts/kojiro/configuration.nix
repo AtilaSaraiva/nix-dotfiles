@@ -63,6 +63,30 @@
 
   };
 
+  # Wireguard Client
+  networking.wireguard.interfaces.wg0 = {
+    ips = [ "10.100.0.203/24" "fda4:4413:3bb1::203/64" ];
+    privateKeyFile = "/home/atila/wireguard-keys/private";
+    peers = [
+      {
+        publicKey = "kjVAAeIGsN0r3StYDQ2vnYg6MbclMrPALdm07qZtRCE=";
+        allowedIPs = [
+          "10.100.0.0/24"
+          "fda4:4413:3bb1::/64"
+          # Multicast IPs
+          "224.0.0.251/32"
+          "ff02::fb/128"
+        ];
+        endpoint = "home.pedrohlc.com:51820";
+        persistentKeepalive = 25;
+      }
+    ];
+    postSetup = ''
+      ip link set wg0 multicast on
+    '';
+  };
+
+
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 }
