@@ -269,7 +269,7 @@ in
 
     boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
     boot.cleanTmpDir = !cfg.boot.tmpOnTmpfs;
-    boot.tmpOnTmpfsSize = "90%";
+    boot.tmpOnTmpfsSize = "180%";
     boot.loader.systemd-boot.enable = cfg.boot.loader.systemdBoot.enable;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
