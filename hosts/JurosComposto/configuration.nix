@@ -40,6 +40,7 @@
       useOSProber = false;
       kernelPackage = pkgs.linuxPackages_zen;
       extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
+      tmpOnTmpfs = true;
     };
 
     packages = {
