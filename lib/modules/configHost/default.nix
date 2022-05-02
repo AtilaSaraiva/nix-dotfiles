@@ -262,11 +262,6 @@ in
     time.timeZone = cfg.machine.timeZone;
     system.stateVersion = cfg.machine.stateVersion;
 
-    nix = {
-      package = pkgs.nixUnstable;
-      extraOptions = ''experimental-features = nix-command flakes'';
-    };
-
     boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
     boot.cleanTmpDir = !cfg.boot.tmpOnTmpfs;
     boot.tmpOnTmpfsSize = "180%";
@@ -568,12 +563,20 @@ in
       algorithm = "zstd";
       memoryPercent = 90;
     };
-    nix.autoOptimiseStore = true;
-    nix.gc = {
+    nix = {
+      autoOptimiseStore = true;
+      gc = {
         automatic = true;
         persistent = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
+      };
+      extraOptions = ''
+        keep-outputs = true
+        keep-derivations = true
+        experimental-features = nix-command flakes
+      '';
+      package = pkgs.nixUnstable;
     };
 
     system.autoUpgrade = {
