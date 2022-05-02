@@ -438,7 +438,7 @@ in
         youtube-dl
         sayonara
         homebank
-        droidmote
+        unstable.droidmote
         gimp-with-plugins
         obsidian
         unstable.irpf
