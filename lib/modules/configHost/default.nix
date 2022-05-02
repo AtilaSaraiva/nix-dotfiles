@@ -457,7 +457,6 @@ in
         steam-run
         protontricks
         unstable.cataclysm-dda
-        ryujinx
         endgame-singularity
         mangohud
       ];
