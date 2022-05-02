@@ -364,6 +364,8 @@ in
         cheat
         imv
         rssguard
+        unstable.nix-du
+        graphviz
 
         # lf
         lf
