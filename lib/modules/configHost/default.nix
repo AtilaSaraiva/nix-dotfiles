@@ -436,6 +436,7 @@ in
         sayonara
         homebank
         unstable.droidmote
+        cached-nix-shell
         gimp-with-plugins
         obsidian
         unstable.irpf
