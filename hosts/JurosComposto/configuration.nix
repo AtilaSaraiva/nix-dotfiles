@@ -45,6 +45,8 @@
 
     packages = {
       useDefaultGaming = true;
+      extra = with pkgs; [
+      ];
     };
 
     snapperExtraDir = {
