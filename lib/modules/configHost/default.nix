@@ -440,6 +440,7 @@ in
         gimp-with-plugins
         obsidian
         unstable.irpf
+        unstable.bottles
       ];
 
       defaultGaming = [
