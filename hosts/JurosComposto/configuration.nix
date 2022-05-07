@@ -111,6 +111,13 @@
 
   services.amdgpu-fan.enable = true;
 
+  nix.sshServe = {
+    enable = true;
+    keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJEDBtZRp53vGMrfJpuy9DZDgN1B77zB141EQG++PHD6 atilasaraiva@gmail.com"
+    ];
+  };
+
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 }
