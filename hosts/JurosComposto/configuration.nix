@@ -26,8 +26,9 @@
          shell = pkgs.zsh;
          extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
          uid = 1001;
-         authorizedKeys.keys = [
+         openssh.authorizedKeys.keys = [
            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJEDBtZRp53vGMrfJpuy9DZDgN1B77zB141EQG++PHD6 atilasaraiva@gmail.com"
+           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAgKaUqBBJjthB/Pmxh878RXs3Vh9mpIKUZ/U0nZ67S4K492VB3IzhyiSo3pL4RUVorNPTOEjsNAh7OCM9eNrmkaVs49OUr43JV4pCD2CqfYEpbtDN6s1E5fswfpvmi3d2aF7kpHP0OOKisw2nOe9Vp3VdHMPdmU4cXtrbYyBruWMPbZ29M6tIKqmEzZjLnDdAplSLzfAy+vAlpUxLE1xhEXN91cRF98xMmMCTOfyHgzRkdX0Jl2FGWMoGP/1NB5zPgHMh+7rJNXEWYnxd01mQiXlAjBLMUGH46lB2CNOhAtpEyDTazRhAw7VY5+Ge5rjrO0ht6AczroWG9KpNEZ5jJ671Rpzk4kghqHa2EChtH2x6kY0s6hM4QWiGE58Bry9z0APsoR64t1tIXdbsG54NhAbTstb4RHUpuOi8Y00qWCX4XzvRNIMcFj/fUSieTExjyosXcC4gLlN2KJOBJOXHpAjzyogEJ3T4AUfTOSNQ/o24wRzMsx4dz4YZFzhq1wrD/FGuzule08cvrSRcBrlEaslHdlWu9hf99zZUAGZ8ncZNmYwn0conJNRJp55qOSNiJ8q4yn0WNhy6sBnkfzNf+yOcPoCWRRakBwlt3Z4iC7vPWPzXcoHFMxoXnwIq0jbMYT1c2N/2GYWukB92+7S3De/DILVoFZwcC6cpwpWB5Q== root@JurosComposto"
          ];
       };
       sabrina = {
@@ -118,6 +119,7 @@
     enable = true;
     keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJEDBtZRp53vGMrfJpuy9DZDgN1B77zB141EQG++PHD6 atilasaraiva@gmail.com"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAgKaUqBBJjthB/Pmxh878RXs3Vh9mpIKUZ/U0nZ67S4K492VB3IzhyiSo3pL4RUVorNPTOEjsNAh7OCM9eNrmkaVs49OUr43JV4pCD2CqfYEpbtDN6s1E5fswfpvmi3d2aF7kpHP0OOKisw2nOe9Vp3VdHMPdmU4cXtrbYyBruWMPbZ29M6tIKqmEzZjLnDdAplSLzfAy+vAlpUxLE1xhEXN91cRF98xMmMCTOfyHgzRkdX0Jl2FGWMoGP/1NB5zPgHMh+7rJNXEWYnxd01mQiXlAjBLMUGH46lB2CNOhAtpEyDTazRhAw7VY5+Ge5rjrO0ht6AczroWG9KpNEZ5jJ671Rpzk4kghqHa2EChtH2x6kY0s6hM4QWiGE58Bry9z0APsoR64t1tIXdbsG54NhAbTstb4RHUpuOi8Y00qWCX4XzvRNIMcFj/fUSieTExjyosXcC4gLlN2KJOBJOXHpAjzyogEJ3T4AUfTOSNQ/o24wRzMsx4dz4YZFzhq1wrD/FGuzule08cvrSRcBrlEaslHdlWu9hf99zZUAGZ8ncZNmYwn0conJNRJp55qOSNiJ8q4yn0WNhy6sBnkfzNf+yOcPoCWRRakBwlt3Z4iC7vPWPzXcoHFMxoXnwIq0jbMYT1c2N/2GYWukB92+7S3De/DILVoFZwcC6cpwpWB5Q== root@JurosComposto"
     ];
   };
 
