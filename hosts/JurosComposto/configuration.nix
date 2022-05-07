@@ -26,6 +26,9 @@
          shell = pkgs.zsh;
          extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
          uid = 1001;
+         authorizedKeys.keys = [
+           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJEDBtZRp53vGMrfJpuy9DZDgN1B77zB141EQG++PHD6 atilasaraiva@gmail.com"
+         ];
       };
       sabrina = {
          isNormalUser = true;

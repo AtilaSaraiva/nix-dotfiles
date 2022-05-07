@@ -649,6 +649,13 @@ in
           22
           35901
         ];
+        hostKeys = [
+          {
+            bits = 4096;
+            path = "/etc/ssh/ssh_host_rsa_key";
+            type = "rsa";
+          }
+        ];
     };
 
     users.users = cfg.users.available;
