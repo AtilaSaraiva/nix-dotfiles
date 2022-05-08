@@ -448,7 +448,7 @@ in
         zeroad
         minetest
         lutris
-        yuzu-ea
+        unstable.yuzu-ea
         unstable.rpcs3
         pcsx2
         wine64Packages.stagingFull
