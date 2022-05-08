@@ -60,7 +60,6 @@
         minetest
         lutris
         mangohud
-        #yuzu-ea
       ];
     };
 
@@ -90,6 +89,7 @@
   };
 
   nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
+  nix.requireSignedBinaryCaches = false;
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
