@@ -90,19 +90,6 @@
 
   nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
   nix.requireSignedBinaryCaches = false;
-  nix.buildMachines = [
-    {
-      hostName = "192.168.0.19";
-      system = "x86_64-linux";
-      supportedFeatures = [ "big-parallel" "kvm" ];
-      sshUser = "atila";
-      maxJobs = 20;
-      speedFactor = 2;
-      sshKey = "/home/atila/.ssh/id_private";
-    }
-  ];
-
-  nix.distributedBuilds = true;
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
