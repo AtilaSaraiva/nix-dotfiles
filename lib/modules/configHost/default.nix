@@ -441,6 +441,7 @@ in
         obsidian
         unstable.irpf
         unstable.bottles
+        microsoft-edge-beta
       ];
 
       defaultGaming = [
