@@ -88,8 +88,9 @@
     '';
   };
 
-  nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
-  nix.requireSignedBinaryCaches = false;
+  nix.binaryCaches = [ "nix-cache.atila.com" ];
+  #nix.requireSignedBinaryCaches = false;
+  nix.binaryCachePublicKeys = [ "nix-cache.atila.com:ZDPBr5CfpBck7aCWYvUIQ8KrVfqy/ym7QiCGRMFqGnY=" ];
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";

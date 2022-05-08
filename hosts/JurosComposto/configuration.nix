@@ -7,6 +7,7 @@
 {
   imports = [
       ./hardware-configuration.nix
+      ./nix-serve.nix
   ];
 
   hostConfig = {
