@@ -361,6 +361,7 @@ in
         rssguard
         unstable.nix-du
         graphviz
+        any-nix-shell
 
         # lf
         lf
@@ -501,6 +502,9 @@ in
       };
       shellInit = ''
           source /home/atila/.config/shell/shenv
+      '';
+      promptInit = ''
+        any-nix-shell zsh --info-right | source /dev/stdin
       '';
     };
 
