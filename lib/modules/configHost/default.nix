@@ -359,7 +359,7 @@ in
         cheat
         imv
         rssguard
-        unstable.nix-du
+        nix-du
         graphviz
         any-nix-shell
 
@@ -416,13 +416,13 @@ in
         megasync
         keepassxc
         bitwarden
-        unstable.kotatogram-desktop
+        kotatogram-desktop
         zathura
         font-manager
         gnome.gucharmap
         mpv
         buku
-        unstable.oil-buku
+        oil-buku
         libsForQt5.okular
         jabref
         texlive.combined.scheme-full
@@ -436,12 +436,12 @@ in
         youtube-dl
         sayonara
         homebank
-        unstable.droidmote
+        droidmote
         cached-nix-shell
         gimp-with-plugins
         obsidian
-        unstable.irpf
-        unstable.bottles
+        irpf
+        bottles
         microsoft-edge-beta
       ];
 
@@ -450,14 +450,14 @@ in
         zeroad
         minetest
         lutris
-        unstable.yuzu-ea
-        unstable.rpcs3
+        yuzu-ea
+        rpcs3
         pcsx2
         wine64Packages.stagingFull
         airshipper
         steam-run
         protontricks
-        unstable.cataclysm-dda
+        cataclysm-dda
         endgame-singularity
         mangohud
       ];
