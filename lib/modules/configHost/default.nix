@@ -361,6 +361,7 @@ in
         rssguard
         unstable.nix-du
         graphviz
+        any-nix-shell
 
         # lf
         lf
@@ -502,6 +503,9 @@ in
       shellInit = ''
           source /home/atila/.config/shell/shenv
       '';
+      promptInit = ''
+        any-nix-shell zsh --info-right | source /dev/stdin
+      '';
     };
 
     environment.variables = let
@@ -580,7 +584,30 @@ in
         experimental-features = nix-command flakes
       '';
       package = pkgs.nixUnstable;
+      trustedUsers = [ "@wheel" ];
     };
+    nix.buildMachines = [
+      {
+        hostName = "192.168.0.19";
+        system = "x86_64-linux";
+        supportedFeatures = [ "big-parallel" "kvm" ];
+        sshUser = "atila";
+        maxJobs = 20;
+        speedFactor = 2;
+        sshKey = "/home/atila/.ssh/id_private";
+      }
+      {
+        hostName = "192.168.0.229";
+        system = "x86_64-linux";
+        supportedFeatures = [ "big-parallel" "kvm" ];
+        sshUser = "atila";
+        maxJobs = 3;
+        speedFactor = 1;
+        sshKey = "/home/atila/.ssh/id_private";
+      }
+    ];
+
+  nix.distributedBuilds = true;
 
     system.autoUpgrade = {
       enable = true;
