@@ -275,7 +275,7 @@ in
       "kernel.sysrq"   = 1;
       };
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
-    boot.kernelParams = [ "quiet" "udev.log_level=3" ];
+    boot.kernelParams = [ "quiet" "udev.log_level=3" "transparent_hugepage=never" ];
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
@@ -327,6 +327,7 @@ in
         tmux
         compsize
         xorg.xhost
+        xorg.xinit
         rpi-imager
         ncdu
         ripgrep
@@ -716,7 +717,7 @@ in
         alsa.support32Bit = true;
         pulse.enable = true;
         jack.enable = true;
-        #wireplumber.enable = true;
+        wireplumber.enable = true;
     };
     hardware.pulseaudio.enable = false;
 
