@@ -3,15 +3,15 @@
 
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-2111.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-2105.url = "github:NixOS/nixpkgs/nixos-21.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
 
     let
 
@@ -28,12 +28,6 @@
           (builtins.attrNames (builtins.readDir dir))
       ) ./lib/modules;
 
-      unstable-overlay = final: prev: {  # TODO: define these on ./lib/overlays
-        unstable = import inputs.nixpkgs-unstable {
-          system = prev.system;
-          config.allowUnfree = true;
-        };
-      };
       unstable-small-overlay = final: prev: {  # TODO: define these on ./lib/overlays
         unstableSmall = import inputs.nixpkgs-unstable-small {
           system = prev.system;
@@ -53,7 +47,7 @@
         };
       };
       overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay release-2105-overlay master-overlay ]; })
+        ({ ... }: { nixpkgs.overlays = [ unstable-small-overlay release-2105-overlay master-overlay ]; })
       ];
 
       mkHost = hostConfig:
