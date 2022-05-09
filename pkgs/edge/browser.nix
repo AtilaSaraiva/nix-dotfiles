@@ -14,20 +14,20 @@
 , nss
 , nspr
 , atk
-, at_spi2_atk
+, at-spi2-atk
 , xorg
 , cups
-, dbus_libs
+, dbus
 , expat
 , libdrm
 , libxkbcommon
-, gnome3
-, gnome2
+, gtk3
+, pango
 , cairo
 , gdk-pixbuf
 , mesa
 , alsaLib
-, at_spi2_core
+, at-spi2-core
 , libuuid
 , systemd
 }:
@@ -64,16 +64,16 @@ stdenv.mkDerivation rec {
   buildPhase = let
     libPath = {
       msedge = lib.makeLibraryPath [
-        glibc glib nss nspr atk at_spi2_atk xorg.libX11
-        xorg.libxcb cups.lib dbus_libs.lib expat libdrm
+        glibc glib nss nspr atk at-spi2-atk xorg.libX11
+        xorg.libxcb cups.lib dbus.lib expat libdrm
         xorg.libXcomposite xorg.libXdamage xorg.libXext
         xorg.libXfixes xorg.libXrandr libxkbcommon
-        gnome3.gtk gnome2.pango cairo gdk-pixbuf mesa
-        alsaLib at_spi2_core xorg.libxshmfence systemd
+        gtk3 pango cairo gdk-pixbuf mesa
+        alsaLib at-spi2-core xorg.libxshmfence systemd
       ];
       naclHelper = lib.makeLibraryPath [
         glib nspr atk libdrm xorg.libxcb mesa xorg.libX11
-        xorg.libXext dbus_libs.lib libxkbcommon
+        xorg.libXext dbus.lib libxkbcommon
       ];
       libwidevinecdm = lib.makeLibraryPath [
         glib nss nspr

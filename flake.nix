@@ -11,7 +11,7 @@
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
 
     let
 
@@ -28,12 +28,6 @@
           (builtins.attrNames (builtins.readDir dir))
       ) ./lib/modules;
 
-      unstable-overlay = final: prev: {  # TODO: define these on ./lib/overlays
-        unstable = import inputs.nixpkgs-unstable {
-          system = prev.system;
-          config.allowUnfree = true;
-        };
-      };
       unstable-small-overlay = final: prev: {  # TODO: define these on ./lib/overlays
         unstableSmall = import inputs.nixpkgs-unstable-small {
           system = prev.system;
@@ -53,7 +47,7 @@
         };
       };
       overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay release-2105-overlay master-overlay ]; })
+        ({ ... }: { nixpkgs.overlays = [ unstable-small-overlay release-2105-overlay master-overlay ]; })
       ];
 
       mkHost = hostConfig:
