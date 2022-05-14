@@ -450,6 +450,8 @@ in
         zeroad
         minetest
         lutris
+        openssl
+        opusfile
         unstable.yuzu-ea
         unstable.rpcs3
         pcsx2
