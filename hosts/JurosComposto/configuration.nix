@@ -54,6 +54,14 @@
     };
 
     snapperExtraDir = {
+      home = {
+          subvolume = "/home";
+          extraConfig = ''
+            ALLOW_USERS="atila"
+            TIMELINE_CREATE=yes
+            TIMELINE_CLEANUP=yes
+          '';
+      };
       documentos = {
         subvolume = "/home/atila/Files/Documentos/";
         extraConfig = ''

@@ -88,7 +88,7 @@
     '';
   };
 
-  nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
+  #nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
   nix.requireSignedBinaryCaches = false;
 
   # Force radv
