@@ -59,6 +59,7 @@
         zeroad
         minetest
         lutris
+        steam-run
         mangohud
       ];
     };
