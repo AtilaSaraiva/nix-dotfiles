@@ -60,6 +60,7 @@
         minetest
         lutris
         steam-run
+        openmw
         mangohud
       ];
     };

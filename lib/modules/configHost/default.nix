@@ -462,6 +462,7 @@ in
         unstable.cataclysm-dda
         endgame-singularity
         mangohud
+        openmw
       ];
       in
         (if cfg.packages.useDefault
