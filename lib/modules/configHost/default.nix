@@ -441,7 +441,7 @@ in
         gimp-with-plugins
         obsidian
         unstable.irpf
-        unstable.bottles
+        bottles
         microsoft-edge-beta
       ];
 
@@ -652,7 +652,10 @@ in
         export MOZ_ENABLE_WAYLAND=1
       '';
     };
-    xdg.portal.wlr.enable = true;
+    xdg.portal = {
+      wlr.enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
 
     services.printing.enable = true;
 
