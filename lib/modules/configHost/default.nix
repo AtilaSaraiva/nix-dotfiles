@@ -440,7 +440,7 @@ in
         cached-nix-shell
         gimp-with-plugins
         obsidian
-        unstable.irpf
+        master.irpf
         bottles
         microsoft-edge-beta
       ];
