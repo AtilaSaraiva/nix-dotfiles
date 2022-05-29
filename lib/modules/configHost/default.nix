@@ -346,7 +346,7 @@ in
         nix-prefetch-scripts
         qjackctl
         nox
-        distrobox
+        master.distrobox
         cage
         binutils
         nixpkgs-fmt
@@ -441,7 +441,7 @@ in
         gimp-with-plugins
         obsidian
         master.irpf
-        bottles
+        unstable.bottles
         microsoft-edge-beta
       ];
 
