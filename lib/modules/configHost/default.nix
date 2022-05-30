@@ -443,6 +443,7 @@ in
         master.irpf
         bottles
         microsoft-edge-beta
+        elementary-planner
       ];
 
       defaultGaming = [
