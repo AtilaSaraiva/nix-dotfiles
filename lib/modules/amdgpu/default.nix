@@ -4,35 +4,42 @@ with lib;
 
 let
   cfg = config.services.amdgpu-fan;
-in {
+  format = pkgs.formats.yaml { };
+in
+{
   options.services.amdgpu-fan = {
     enable = mkEnableOption "Fan controller for AMD graphics cards running the amdgpu driver on Linux";
+    settings = mkOption {
+      type = format.type;
+      default = { };
+      defaultText = literalExpression "{ }";
+      example = literalExpression ''
+        {
+          speed_matrix = [
+            [0 0]
+            [40 40]
+            [60 60]
+            [70 70]
+            [80 90]
+          ];
+          temp_drop = 8;
+        };
+      '';
+      description = ''
+        Configuration written to
+        <filename>/etc/amdgpu-fan.yml</filename>. See
+        <link xlink:href="<link-to-more-info>"/> for more options.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
-    environment = {
-      etc."amdgpu-fan.yml".text = ''
-        # /etc/amdgpu-fan.yml
-        # eg:
-
-        speed_matrix:  # -[temp(*C), speed(0-100%)]
-        - [0, 0]
-        - [40, 40]
-        - [60, 60]
-        - [70, 70]
-        - [80, 90]
-
-        # optional
-        # cards:  # can be any card returned from
-        #         # ls /sys/class/drm | grep "^card[[:digit:]]$"
-        # - card0
-
-        # optional
-        temp_drop: 8  # how much temperature should drop before fan speed is decreased
-      '';
-
-      systemPackages = [ pkgs.amdgpu-fan ];
+    environment.etc."amdgpu-fan.yml" = mkIf (cfg.settings != { }) {
+      source = format.generate "amdgpu-fan.yml" cfg.settings;
     };
+
+    environment.systemPackages = [ pkgs.amdgpu-fan ];
+
     systemd.services.amdgpu-fan = {
       description = "A fan manager daemon for amd gpus";
       wantedBy = [ "sysinit.target" ];
