@@ -123,7 +123,19 @@
     '';
   };
 
-  services.amdgpu-fan.enable = true;
+  services.amdgpu-fan = { 
+    enable = true;
+    settings ={ 
+      speed_matrix = [
+        [0 0]
+        [40 40]
+        [60 60]
+        [70 70]
+        [80 90]
+      ];
+      temp_drop = 8;
+    };
+  };
 
   nix.sshServe = {
     enable = true;
