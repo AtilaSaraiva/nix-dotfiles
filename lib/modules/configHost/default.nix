@@ -441,7 +441,7 @@ in
         gimp-with-plugins
         obsidian
         master.irpf
-        unstable.bottles
+        bottles
         microsoft-edge-beta
       ];
 
