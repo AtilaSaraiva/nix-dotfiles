@@ -50,6 +50,7 @@
     packages = {
       useDefaultGaming = true;
       extra = with pkgs; [
+        unigine-heaven
       ];
     };
 
