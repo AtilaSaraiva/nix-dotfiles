@@ -444,6 +444,7 @@ in
         bottles
         microsoft-edge-beta
         elementary-planner
+        mendeley
       ];
 
       defaultGaming = [
