@@ -445,6 +445,8 @@ in
         microsoft-edge-beta
         elementary-planner
         mendeley
+        ventoy-bin
+        usbimager
       ];
 
       defaultGaming = [
