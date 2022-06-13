@@ -4,6 +4,7 @@ self: super: rec {
   microsoft-edge-stable = super.callPackage (import ./edge).stable { };
   microsoft-edge-beta = super.callPackage (import ./edge).beta { };
   microsoft-edge-dev = super.callPackage (import ./edge).dev { };
+  fpm      = super.callPackage ./fpm { };
   #distrobox = super.distrobox.overrideAttrs (oldAttrs: {
     #version = "unstable-2022-05-25";
     #src = super.fetchFromGitHub {

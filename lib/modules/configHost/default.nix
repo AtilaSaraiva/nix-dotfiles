@@ -362,6 +362,7 @@ in
         unstable.nix-du
         graphviz
         any-nix-shell
+        fpm
 
         # lf
         lf
