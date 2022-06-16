@@ -585,6 +585,7 @@ in
       '';
       package = pkgs.nixUnstable;
       trustedUsers = [ "@wheel" ];
+      nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
     };
     #nix.buildMachines = [
       #{
@@ -606,8 +607,11 @@ in
         #sshKey = "/home/atila/.ssh/id_private";
       #}
     #];
+    system.extraSystemBuilderCmds = ''
+      ln -s ${pkgs.path} $out/nixpkgs
+    '';
 
-  nix.distributedBuilds = true;
+    nix.distributedBuilds = true;
 
     system.autoUpgrade = {
       enable = true;
