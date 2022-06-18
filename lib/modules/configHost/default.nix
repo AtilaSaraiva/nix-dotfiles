@@ -333,7 +333,6 @@ in
         mate.pluma
         rmlint
         podman-compose
-        pacman
         smartmontools
         iotop
         easyeffects
@@ -362,7 +361,12 @@ in
         unstable.nix-du
         graphviz
         any-nix-shell
+
+        # research
+        jabref
+        texlive.combined.scheme-full
         fpm
+        mendeley
 
         # lf
         lf
@@ -425,8 +429,6 @@ in
         buku
         unstable.oil-buku
         libsForQt5.okular
-        jabref
-        texlive.combined.scheme-full
         qbittorrent
         xournalpp
         obs-studio
@@ -445,7 +447,6 @@ in
         bottles
         microsoft-edge-beta
         elementary-planner
-        mendeley
         ventoy-bin
         usbimager
       ];
