@@ -367,6 +367,7 @@ in
         texlive.combined.scheme-full
         fpm
         mendeley
+        julia-bin
 
         # lf
         lf
