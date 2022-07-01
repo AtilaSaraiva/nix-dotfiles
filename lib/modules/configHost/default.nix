@@ -368,6 +368,7 @@ in
         fpm
         mendeley
         julia-bin
+        fobis
 
         # lf
         lf

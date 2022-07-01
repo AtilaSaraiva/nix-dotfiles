@@ -5,7 +5,7 @@ self: super: rec {
   microsoft-edge-beta = super.callPackage (import ./edge).beta { };
   microsoft-edge-dev = super.callPackage (import ./edge).dev { };
   fpm      = super.callPackage ./fpm { };
-  fobis      = super.callPackage ./fobis { };
+  fobis      = super.python3Packages.callPackage ./fobis { };
   #distrobox = super.distrobox.overrideAttrs (oldAttrs: {
     #version = "unstable-2022-05-25";
     #src = super.fetchFromGitHub {
