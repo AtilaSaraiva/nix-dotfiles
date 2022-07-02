@@ -43,7 +43,7 @@
     boot = {
       useOSProber = false;
       kernelPackage = pkgs.linuxPackages_zen;
-      extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
+      #extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
       tmpOnTmpfs = true;
     };
 
@@ -124,9 +124,9 @@
     '';
   };
 
-  services.amdgpu-fan = { 
+  services.amdgpu-fan = {
     enable = true;
-    settings ={ 
+    settings ={
       speed_matrix = [
         [0 0]
         [40 40]
