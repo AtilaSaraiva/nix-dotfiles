@@ -345,7 +345,7 @@ in
         nix-prefetch-scripts
         qjackctl
         nox
-        master.distrobox
+        unstable.distrobox
         cage
         binutils
         nixpkgs-fmt
@@ -395,7 +395,7 @@ in
         # Browsers
         firefox-wayland
         qutebrowser
-        release2105.google-chrome
+        google-chrome
         brave
 
         # Database
