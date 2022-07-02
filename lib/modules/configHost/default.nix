@@ -764,5 +764,13 @@ in
     #services.undervolt.gpuOffset = 50;
     programs.corectrl.enable = true;
     programs.corectrl.gpuOverclock.enable = true;
+
+    programs.msmtp.setSendmail = true;
+    services.smartd.enable = true;
+    services.smartd.notifications.test = true;
+    services.postfix.setSendmail = true;
+    services.smartd.notifications.mail.enable = true;
+    services.postfix.enable = true;
+    services.smartd.notifications.mail.recipient = "atilasaraiva@gmail.com";
   };
 }
