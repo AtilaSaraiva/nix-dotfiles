@@ -757,6 +757,8 @@ in
       interval = "monthly";
     };
 
+    services.fcron.enable = true;
+
     programs.dconf.enable = true;
 
     hardware.opengl.enable = true;
