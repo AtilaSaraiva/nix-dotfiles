@@ -505,11 +505,20 @@ in
       shellAliases = {
         rebuild-os = "sudo nixos-rebuild switch";
         upgrade-os = ''
-          sudo nixos-rebuild --upgrade
+          cd /etc/nixos
+          nix flake update
+          sudo nixos-rebuild boot
+          git add flake.nix
+          git commit -m "updated inputs"
+          git push
           echo "Please reboot"
         '';
         edit-os = "nvim /etc/nixos/configuration.nix";
         gc-os = "nix-collect-garbage -d";
+        verifyStore = "nix store verify --all --no-trust";
+        repairStore = ''
+          nix-store --verify --check-contents --repair
+        '';
       };
       shellInit = ''
           source /home/atila/.config/shell/shenv
