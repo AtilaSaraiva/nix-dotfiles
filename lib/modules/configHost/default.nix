@@ -508,7 +508,7 @@ in
           cd /etc/nixos
           nix flake update
           sudo nixos-rebuild boot
-          git add flake.nix
+          git add flake.lock
           git commit -m "updated inputs"
           git push
           echo "Please reboot"
@@ -766,7 +766,12 @@ in
       interval = "monthly";
     };
 
-    services.fcron.enable = true;
+    services.fcron = {
+      enable = true;
+      systab = ''
+        0 12 * * 1 nix-store --verify --check-contents --repair
+      '';
+    };
 
     programs.dconf.enable = true;
 
