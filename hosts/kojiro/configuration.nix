@@ -81,7 +81,7 @@
           "224.0.0.251/32"
           "ff02::fb/128"
         ];
-        endpoint = "home.pedrohlc.com:51820";
+        endpoint = "lab.pedrohlc.com:51820";
         persistentKeepalive = 25;
       }
     ];
