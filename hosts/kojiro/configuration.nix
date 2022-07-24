@@ -15,6 +15,7 @@
     machine = {
       hostName = "kojiro";
       stateVersion = "21.11";
+      autoUpgrade = false;
     };
 
     isBtrfs = true;

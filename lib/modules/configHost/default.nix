@@ -36,6 +36,12 @@ in
         default = "21.05";
         example = "21.11";
       };
+
+      autoUpgrade = mkOption {
+        description = "Automatically upgrade de system?";
+        type = with types; bool;
+        default = true;
+      };
     };
 
     isBtrfs = mkEnableOption ''
@@ -411,7 +417,6 @@ in
            my-python-packages = python-packages: with python-packages; [
                pynvim
                devito
-               jupyterlab
                matplotlib
                numpy
             #other python packages you want
@@ -630,7 +635,7 @@ in
     nix.distributedBuilds = true;
 
     system.autoUpgrade = {
-      enable = true;
+      enable = cfg.machine.autoUpgrade;
       flake = "github:AtilaSaraiva/nix-dotfiles";
       dates = "13:00";
     };
