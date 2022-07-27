@@ -426,6 +426,7 @@ in
            python-with-my-packages)
 
         # Apps
+        calibre
         onlyoffice-bin
         tdesktop
         dropbox
