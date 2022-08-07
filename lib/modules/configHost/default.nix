@@ -510,6 +510,10 @@ in
     programs.file-roller.enable = true;
     programs.autojump.enable = true;
 
+    security.sudo.extraConfig = ''
+      Defaults passwd_timeout=0
+    '';
+
     programs.zsh = {
       enable = true;
       shellAliases = {
