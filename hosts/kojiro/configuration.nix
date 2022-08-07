@@ -43,8 +43,8 @@
 
     boot = {
       useOSProber = false;
-      kernelPackage = pkgs.linuxPackages;
-      extraModulePackages = [ pkgs.linuxPackages.rtlwifi_new ];
+      #kernelPackage = pkgs.linuxPackages;
+      extraModulePackages = [ config.boot.kernelPackages.rtlwifi_new ];
       blacklistedKernelModules = [
         "rtw88_8822ce"
         "rtw88_8822c"
