@@ -300,6 +300,7 @@ in
     services.jellyfin = {
       enable = cfg.enableJellyfin;
       user = "atila";
+      openFirewall = true;
     };
 
     security.pam.loginLimits = [
@@ -461,6 +462,7 @@ in
         elementary-planner
         ventoy-bin
         usbimager
+        jellyfin-mpv-shim
       ];
 
       defaultGaming = [

@@ -18,7 +18,8 @@
     };
 
     isBtrfs = true;
-    enablePlex = true;
+    #enablePlex = true;
+    enableJellyfin = true;
 
     users.available = {
       atila = {
