@@ -148,4 +148,6 @@
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
+
+  programs.steam.enable = true;
 }
