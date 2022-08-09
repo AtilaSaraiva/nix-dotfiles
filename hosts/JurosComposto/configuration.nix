@@ -18,7 +18,7 @@
     };
 
     isBtrfs = true;
-    #enablePlex = true;
+    enablePlex = false;
     enableJellyfin = true;
 
     users.available = {
