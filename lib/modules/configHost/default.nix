@@ -562,7 +562,7 @@ in
 
     i18n.defaultLocale = cfg.machine.locale;
 
-    services.auto-cpufreq.enable = cfg.isLaptop;
+    services.auto-cpufreq.enable = true;
 
     services.lorri.enable = true;
     services.locate = {
