@@ -126,6 +126,12 @@
       options = [ "subvol=files/@Anime"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
     };
 
+  fileSystems."/mnt/storage" =
+    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
+      fsType = "btrfs";
+      options = [ "subvol=storage"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
+    };
+
   fileSystems."/home/atila/Games/big" =
     { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
       fsType = "btrfs";

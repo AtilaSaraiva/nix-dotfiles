@@ -151,5 +151,12 @@
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
+  services.jackett.enable = true;
+  services.bazarr.enable = true;
+  services.sonarr = {
+    enable = true;
+    user = "atila";
+  };
+
   programs.steam.enable = true;
 }
