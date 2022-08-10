@@ -45,7 +45,7 @@
       useOSProber = false;
       kernelPackage = pkgs.linuxPackages_zen;
       #extraModulePackages = [ pkgs.linuxPackages_zen.rtl88xxau-aircrack ];
-      extraModulePackages = [ config.boot.kernelPackages.cpupower ];
+      #extraModulePackages = [ config.boot.kernelPackages.cpupower ];
       tmpOnTmpfs = true;
     };
 
