@@ -497,7 +497,22 @@ in
     services.xserver = {
       enable = true;
 
-      displayManager.gdm.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          autoSuspend = false;
+          autoLogin = {
+            delay = 2;
+          };
+        };
+
+
+        defaultSession = "sway";
+        autoLogin = {
+          enable = true;
+          user = "atila";
+        };
+      };
 
       desktopManager.cinnamon.enable = true;
 
