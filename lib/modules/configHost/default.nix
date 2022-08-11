@@ -595,7 +595,7 @@ in
     zramSwap = {
       enable = true;
       priority = 32000;
-      algorithm = "zstd";
+      algorithm = "lz4";
       memoryPercent = 90;
     };
     nix = {
