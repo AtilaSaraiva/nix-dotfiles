@@ -158,5 +158,10 @@
     user = "atila";
   };
 
+  services.undervolt = {
+    enable = true;
+    coreOffset = -60;
+  };
+
   programs.steam.enable = true;
 }
