@@ -160,7 +160,7 @@
 
   services.undervolt = {
     enable = true;
-    coreOffset = -55;
+    coreOffset = -50;
   };
 
   programs.steam.enable = true;
