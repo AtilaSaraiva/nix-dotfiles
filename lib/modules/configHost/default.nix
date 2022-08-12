@@ -790,6 +790,7 @@ in
 
     hardware.opengl.extraPackages32 = [
       pkgs.driversi686Linux.amdvlk
+      pkgs.driversi686Linux.mesa
     ];
 
     services.btrfs.autoScrub = {
