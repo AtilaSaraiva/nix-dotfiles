@@ -190,6 +190,11 @@
       cpufreq.max = 1400000;
       scsiLinkPolicy = "med_power_with_dipm";
     };
+
+    services.qbittorrent = {
+      enable = true;
+      user = "atila";
+    };
   };
 
   services.undervolt = {
