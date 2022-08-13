@@ -165,6 +165,22 @@
     };
   };
 
+  specialisation.gnome.configuration = {
+    system.nixos.tags = [ "gnome" ];
+    programs.sway.enable = lib.mkForce false;
+    services.xserver.desktopManager.cinnamon.enable = lib.mkForce false;
+    services.xserver.desktopManager.gnome.enable = lib.mkForce true;
+    services.xserver.displayManager.defaultSession = lib.mkForce "gnome";
+    xdg.portal.wlr.enable = lib.mkForce false;
+    xdg.portal.extraPortals = lib.mkForce [
+      pkgs.xdg-desktop-portal-gnome
+      (pkgs.xdg-desktop-portal-gtk.override {
+        # Do not build portals that we already have.
+        buildPortalsInGnome = false;
+      })
+    ];
+  };
+
   services.undervolt = {
     enable = true;
     coreOffset = -50;
