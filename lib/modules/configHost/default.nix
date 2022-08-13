@@ -788,6 +788,9 @@ in
     ];
     hardware.steam-hardware.enable = true;
 
+    # Rule to increase polling rate of dualshock 4 to reduce input lag
+    services.udev.extraRules = "ACTION=="bind", SUBSYSTEM=="hid", DRIVER=="sony", KERNEL=="*054C:09CC*", ATTR{bt_poll_interval}="1";
+
     hardware.opengl.extraPackages32 = [
       pkgs.driversi686Linux.amdvlk
       pkgs.driversi686Linux.mesa
