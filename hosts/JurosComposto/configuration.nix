@@ -181,6 +181,7 @@
         buildPortalsInGnome = false;
       })
     ];
+    programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
   };
 
   specialisation.nogui.configuration = {
@@ -197,6 +198,7 @@
       enable = true;
       user = "atila";
     };
+    programs.kdeconnect.enable = lib.mkForce false;
   };
 
   services.undervolt = {
@@ -204,6 +206,6 @@
     coreOffset = -50;
   };
 
+  programs.kdeconnect.enable = true;
   programs.steam.enable = true;
-
 }
