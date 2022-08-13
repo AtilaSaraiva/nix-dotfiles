@@ -181,6 +181,17 @@
     ];
   };
 
+  specialisation.nogui.configuration = {
+    system.nixos.tags = [ "nogui" ];
+    services.xserver.enable = lib.mkForce false;
+    programs.sway.enable = lib.mkForce false;
+    powerManagement = {
+      cpuFreqGovernor = "powersave";
+      cpufreq.max = 1400000;
+      scsiLinkPolicy = "med_power_with_dipm";
+    };
+  };
+
   services.undervolt = {
     enable = true;
     coreOffset = -50;
