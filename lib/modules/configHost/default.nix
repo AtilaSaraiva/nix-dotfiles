@@ -301,6 +301,7 @@ in
       enable = cfg.enableJellyfin;
       user = "atila";
       openFirewall = true;
+      package = pkgs.unstable.jellyfin;
     };
 
     security.pam.loginLimits = [
