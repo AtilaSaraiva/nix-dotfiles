@@ -463,6 +463,7 @@ in
         ventoy-bin
         usbimager
         jellyfin-mpv-shim
+        keybase
       ];
 
       defaultGaming = [
