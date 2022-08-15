@@ -463,6 +463,7 @@ in
         ventoy-bin
         usbimager
         jellyfin-mpv-shim
+        keybase-gui
         keybase
       ];
 
@@ -827,5 +828,6 @@ in
     #services.smartd.notifications.mail.enable = true;
     services.postfix.enable = true;
     services.smartd.notifications.mail.recipient = "atilasaraiva@gmail.com";
+    services.keybase.enable = true;
   };
 }
