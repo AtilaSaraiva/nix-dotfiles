@@ -348,7 +348,7 @@ in
         libxfs
         duf
         radeontop
-        btdu
+        unstable.btdu
         nix-prefetch-scripts
         qjackctl
         nox
@@ -483,6 +483,7 @@ in
         endgame-singularity
         mangohud
         openmw
+        unstable.gamescope
       ];
       in
         (if cfg.packages.useDefault
