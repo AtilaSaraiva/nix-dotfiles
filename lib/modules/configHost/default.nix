@@ -466,6 +466,7 @@ in
         jellyfin-mpv-shim
         keybase-gui
         keybase
+        scrcpy
       ];
 
       defaultGaming = [
