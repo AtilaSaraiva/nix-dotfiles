@@ -203,7 +203,7 @@
 
   services.undervolt = {
     enable = true;
-    coreOffset = -50;
+    coreOffset = -40;
   };
 
   programs.kdeconnect.enable = true;
