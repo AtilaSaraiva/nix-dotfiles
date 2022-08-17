@@ -831,6 +831,7 @@ in
     services.postfix.enable = true;
     services.smartd.notifications.mail.recipient = "atilasaraiva@gmail.com";
     services.keybase.enable = true;
+    services.kbfs.enable=true;
 
     programs.adb.enable = true;
   };
