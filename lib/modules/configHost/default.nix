@@ -831,7 +831,14 @@ in
     services.postfix.enable = true;
     services.smartd.notifications.mail.recipient = "atilasaraiva@gmail.com";
     services.keybase.enable = true;
-    services.kbfs.enable=true;
+    services.kbfs = {
+      enable = true;
+      mountPoint = "%h/Files/keybase";
+      extraFlags = [
+        "-label kbfs"
+        "-mount-type normal"
+      ];
+    };
 
     programs.adb.enable = true;
   };
