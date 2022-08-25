@@ -280,6 +280,7 @@ in
       "vm.swappiness"  = 7;
       "kernel.sysrq"   = 1;
       };
+    boot.enableContainers = false;
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
     boot.kernelParams = [ "quiet" "udev.log_level=3" ];
     # Silent boot
@@ -619,7 +620,6 @@ in
       memoryPercent = 90;
     };
     nix = {
-      autoOptimiseStore = true;
       gc = {
         automatic = true;
         persistent = true;
@@ -632,7 +632,10 @@ in
         experimental-features = nix-command flakes
       '';
       package = pkgs.nixUnstable;
-      trustedUsers = [ "@wheel" ];
+      settings = {
+        trusted-users = [ "@wheel" ];
+        auto-optimise-store = true;
+      };
       nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
     };
     #nix.buildMachines = [
