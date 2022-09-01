@@ -778,6 +778,11 @@ in
     };
     hardware.pulseaudio.enable = false;
 
+    hardware.sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
+    };
+
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;
     virtualisation = {
