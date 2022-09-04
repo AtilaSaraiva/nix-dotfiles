@@ -468,6 +468,7 @@ in
         keybase-gui
         keybase
         scrcpy
+        kopia
       ];
 
       defaultGaming = [
