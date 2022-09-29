@@ -91,8 +91,10 @@
     '';
   };
 
-  #nix.binaryCaches = [ "ssh://atila@192.168.0.19" ];
-  nix.requireSignedBinaryCaches = false;
+  nix.settings = {
+    require-sigs = false;
+    substituters = [ "ssh://atila@10.0.0.165" ];
+  };
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
