@@ -826,6 +826,11 @@ in
       '';
     };
 
+    services.tor = {
+      enable = true;
+      client.enable = true;
+    };
+
     programs.dconf.enable = true;
 
     hardware.opengl.enable = true;
