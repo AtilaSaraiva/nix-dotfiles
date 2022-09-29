@@ -509,7 +509,7 @@ in
           enable = true;
           autoSuspend = false;
           autoLogin = {
-            delay = 2;
+            delay = 5;
           };
         };
 
@@ -521,7 +521,7 @@ in
         };
       };
 
-      desktopManager.cinnamon.enable = true;
+      #desktopManager.cinnamon.enable = true;
 
       libinput.enable = true;
 
@@ -585,6 +585,8 @@ in
     i18n.defaultLocale = cfg.machine.locale;
 
     services.auto-cpufreq.enable = cfg.isLaptop;
+
+    qt5.platformTheme = "qt5ct";
 
     services.lorri.enable = true;
     services.locate = {
