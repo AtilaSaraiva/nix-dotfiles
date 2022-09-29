@@ -29,7 +29,7 @@
 let
   # Enable experimental features without having to specify the argument
   nix = pkgs.writeShellScriptBin "nix" ''
-    exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
+    exec ${pkgs.nixVersions.nix_2_9}/bin/nix --experimental-features "nix-command flakes" "$@"
   '';
 in
 pkgs.mkShell {

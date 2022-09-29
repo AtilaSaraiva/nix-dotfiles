@@ -27,7 +27,7 @@
 , cairo
 , gdk-pixbuf
 , mesa
-, alsaLib
+, alsa-lib
 , at-spi2-core
 , libuuid
 , systemd
@@ -70,7 +70,7 @@ stdenv.mkDerivation rec {
         xorg.libXcomposite xorg.libXdamage xorg.libXext
         xorg.libXfixes xorg.libXrandr libxkbcommon
         gtk4 pango cairo gdk-pixbuf mesa
-        alsaLib at-spi2-core xorg.libxshmfence systemd
+        alsa-lib at-spi2-core xorg.libxshmfence systemd
       ];
       naclHelper = lib.makeLibraryPath [
         glib nspr atk libdrm xorg.libxcb mesa xorg.libX11

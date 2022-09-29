@@ -317,7 +317,7 @@ in
 
         # System tools
         (pkgs.writeShellScriptBin "nixf" ''
-          exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
+          exec ${pkgs.nixVersions.nix_2_9}/bin/nix --experimental-features "nix-command flakes" "$@"
         '')
         wget
         vulkan-tools
