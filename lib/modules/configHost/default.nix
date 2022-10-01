@@ -158,6 +158,13 @@ in
       example = true;
     };
 
+    enableAdguard = mkOption {
+      description = "Do you want to enable adguard?";
+      type = types.bool;
+      default = false;
+      example = true;
+    };
+
     enableJellyfin = mkOption {
       description = "Do you want to enable jellyfin?";
       type = types.bool;
@@ -296,6 +303,10 @@ in
     services.plex = {
       enable = cfg.enablePlex;
       user = "atila";
+    };
+
+    services.adguardhome = {
+      enable = cfg.enableAdguard;
     };
 
     services.jellyfin = {

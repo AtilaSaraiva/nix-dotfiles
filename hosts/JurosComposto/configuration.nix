@@ -19,6 +19,7 @@
 
     isBtrfs = true;
     enablePlex = false;
+    enableAdguard = true;
     enableJellyfin = true;
 
     users.available = {
