@@ -469,6 +469,7 @@ in
         keybase
         scrcpy
         kopia
+        monitor-dimensions-calculator
       ];
 
       defaultGaming = [

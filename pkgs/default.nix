@@ -7,6 +7,7 @@ self: super: rec {
   fpm      = super.callPackage ./fpm { };
   fobis      = super.python3Packages.callPackage ./fobis { };
   waybar      = super.callPackage ./waybar { };
+  monitor-dimensions-calculator      = super.callPackage ./monitor-dimensions-calculator { };
   #distrobox = super.distrobox.overrideAttrs (oldAttrs: {
     #version = "unstable-2022-05-25";
     #src = super.fetchFromGitHub {
