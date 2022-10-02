@@ -21,6 +21,7 @@
     enablePlex = false;
     enableAdguard = true;
     enableJellyfin = true;
+    serveNixStore = true;
 
     users.available = {
       atila = {

@@ -165,6 +165,13 @@ in
       example = true;
     };
 
+    serveNixStore = mkOption {
+      description = "Do you want to enable nix-serve?";
+      type = types.bool;
+      default = false;
+      example = true;
+    };
+
     enableJellyfin = mkOption {
       description = "Do you want to enable jellyfin?";
       type = types.bool;
@@ -650,6 +657,9 @@ in
       settings = {
         trusted-users = [ "@wheel" ];
         auto-optimise-store = true;
+        trusted-public-keys = [
+          "key-name:36fe2VUzGDWhD3851hppXbCgQqlMtKSL7XPGNYnzAZk="
+        ];
       };
       nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
     };
@@ -869,5 +879,10 @@ in
     };
 
     programs.adb.enable = true;
+
+    services.nix-serve = {
+      enable = cfg.serveNixStore;
+      secretKeyFile = "/home/atila/.ssh/id_nix";
+    };
   };
 }

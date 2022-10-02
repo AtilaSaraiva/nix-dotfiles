@@ -92,8 +92,8 @@
   };
 
   nix.settings = {
-    require-sigs = false;
-    substituters = [ "ssh://atila@10.0.0.165" ];
+    #require-sigs = false;
+    substituters = [ "http://10.0.0.165:5000" "http://10.100.0.202:5000" ];
   };
 
   # Force radv
