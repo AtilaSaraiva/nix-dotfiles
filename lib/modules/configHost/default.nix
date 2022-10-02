@@ -767,6 +767,8 @@ in
             type = "rsa";
           }
         ];
+        forwardX11 = true;
+        passwordAuthentication = false;
     };
 
     users.users = cfg.users.available;
