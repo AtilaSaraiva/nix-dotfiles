@@ -483,6 +483,7 @@ in
         ventoy-bin
         usbimager
         jellyfin-mpv-shim
+        jellyfin-media-player
         keybase-gui
         keybase
         scrcpy
