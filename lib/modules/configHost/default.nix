@@ -437,7 +437,6 @@ in
         (let
            my-python-packages = python-packages: with python-packages; [
                pynvim
-               devito
                matplotlib
                numpy
             #other python packages you want
