@@ -161,6 +161,10 @@
     enable = true;
     user = "atila";
   };
+  services.jackett = {
+    enable = true;
+    user = "atila";
+  };
 
   specialisation.noundervolt.configuration = {
     system.nixos.tags = [ "noundervolt" ];
