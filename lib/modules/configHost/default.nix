@@ -19,7 +19,7 @@ in
       timeZone = mkOption {
         type = with types; uniq str;
         description = "Host time zone";
-        default = "America/Bahia";
+        default = "America/Edmonton";
         example = "TODO";
       };
 
@@ -477,7 +477,7 @@ in
         obsidian
         master.irpf
         bottles
-        microsoft-edge-beta
+        #microsoft-edge-beta
         elementary-planner
         ventoy-bin
         usbimager
