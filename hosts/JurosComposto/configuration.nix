@@ -56,6 +56,7 @@
       extra = with pkgs; [
         unigine-heaven
         darktable
+        anydesk
       ];
     };
 
