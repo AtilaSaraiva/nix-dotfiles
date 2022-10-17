@@ -109,7 +109,7 @@ in
 
       kernelPackage = mkOption {
         description = "The linux kernel package";
-        default = pkgs.linuxPackages_zen;
+        default = pkgs.linuxPackages_latest;
       };
 
       extraModulePackages = mkOption {
@@ -300,7 +300,7 @@ in
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    #boot.kernelPackages = cfg.boot.kernelPackage;
+    boot.kernelPackages = cfg.boot.kernelPackage;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
@@ -478,7 +478,6 @@ in
         master.irpf
         bottles
         #microsoft-edge-beta
-        elementary-planner
         ventoy-bin
         usbimager
         jellyfin-mpv-shim
