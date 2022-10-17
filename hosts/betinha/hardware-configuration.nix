@@ -8,42 +8,30 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/29939feb-19e3-45fe-8daa-007695d02dc6";
-      fsType = "btrfs";
-      options = [ "subvol=@nixos" "compress=zstd" "autodefrag" "noatime" ];
+    { device = "/dev/disk/by-uuid/23392194-f231-434e-94f4-a792f4cedcd1";
+      fsType = "f2fs";
+      options = [
+        "compress_algorithm=lz4"
+        "compress_chksum"
+        "atgc"
+        "gc_merge"
+        "lazytime"
+      ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0729-D994";
+    { device = "/dev/disk/by-uuid/09AB-786F";
       fsType = "vfat";
     };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/29939feb-19e3-45fe-8daa-007695d02dc6";
-      fsType = "btrfs";
-      options = [ "subvol=@home" "compress=zstd" "autodefrag" "noatime" ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/29939feb-19e3-45fe-8daa-007695d02dc6";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" "compress=zstd" "autodefrag" "noatime" ];
-    };
-
-  fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/29939feb-19e3-45fe-8daa-007695d02dc6";
-      fsType = "btrfs";
-      options = [ "subvol=@var" "compress=zstd" "autodefrag" "noatime" ];
-    };
-
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/d64ad374-a931-4367-9cc7-adccc3bd45ee"; }
+    [ { device = "/dev/disk/by-uuid/aed7e7c2-f054-42e8-b64b-15545bb9305a"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

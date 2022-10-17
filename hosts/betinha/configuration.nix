@@ -18,7 +18,7 @@
       autoUpgrade = false;
     };
 
-    isBtrfs = true;
+    isBtrfs = false;
     enablePlex = false;
     isLaptop = true;
 
@@ -51,7 +51,6 @@
       useDefaultGaming = false;
       extra = with pkgs; [
         zeroad
-        steam-run
       ];
     };
 
