@@ -785,6 +785,15 @@ in
         wifi.powersave = false;
       };
 
+      openconnect.interfaces = {
+        openconnect0 = {
+          gateway = "vpn.ualberta.ca";
+          passwordFile = "/var/lib/secrets/ualbertapass";
+          protocol = "anyconnect";
+          user = "saraivaq";
+        };
+      };
+
       firewall = {
         enable = false;
         #allowedTCPPorts = [ ... ];
