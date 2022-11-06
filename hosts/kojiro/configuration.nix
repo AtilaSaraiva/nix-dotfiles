@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -98,4 +98,22 @@
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
+
+  specialisation.gnome.configuration = {
+    system.nixos.tags = [ "gnome" ];
+    programs.sway.enable = lib.mkForce false;
+    services.xserver.desktopManager.cinnamon.enable = lib.mkForce false;
+    services.xserver.desktopManager.gnome.enable = lib.mkForce true;
+    services.xserver.displayManager.defaultSession = lib.mkForce "gnome";
+    xdg.portal.wlr.enable = lib.mkForce false;
+    xdg.portal.extraPortals = lib.mkForce [
+      pkgs.xdg-desktop-portal-gnome
+      (pkgs.xdg-desktop-portal-gtk.override {
+        # Do not build portals that we already have.
+        buildPortalsInGnome = false;
+      })
+    ];
+    programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
+  };
+
 }
