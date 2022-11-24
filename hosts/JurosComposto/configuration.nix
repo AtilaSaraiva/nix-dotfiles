@@ -19,7 +19,7 @@
 
     isBtrfs = true;
     enablePlex = false;
-    enableAdguard = true;
+    enableAdguard = false;
     enableJellyfin = true;
     serveNixStore = true;
 

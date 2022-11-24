@@ -277,6 +277,12 @@ in
 
     nixpkgs.overlays = [ (import ../../../pkgs) ];
     nixpkgs.config.allowUnfree = true;
+    #nixpkgs.config.permittedInsecurePackages = [
+      #"openjdk-18+36"
+    #];
+    nixpkgs.config.permittedInsecurePackages = [
+      "qtwebkit-5.212.0-alpha4"
+    ];
 
     networking.hostName = cfg.machine.hostName;
     time.timeZone = cfg.machine.timeZone;
@@ -289,6 +295,7 @@ in
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
     boot.loader.systemd-boot.memtest86.enable = true;
+    boot.loader.grub.useOSProber = true;
     boot.kernel.sysctl = {
       "abi.vsyscall32" = 0;
       "vm.swappiness"  = 7;
@@ -296,7 +303,7 @@ in
       };
     boot.enableContainers = false;
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
-    boot.kernelParams = [ "quiet" "udev.log_level=3" ];
+    boot.kernelParams = [ "quiet" "udev.log_level=3" "preempt=voluntary" ];
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
@@ -357,7 +364,7 @@ in
         rpi-imager
         ncdu
         ripgrep
-        mate.pluma
+        #mate.pluma
         rmlint
         podman-compose
         smartmontools
@@ -389,8 +396,8 @@ in
         graphviz
         any-nix-shell
 
-        # research
-        jabref
+        ## research
+        #jabref
         texlive.combined.scheme-full
         fpm
         mendeley
@@ -469,16 +476,16 @@ in
         libreoffice-fresh
         element-desktop
         youtube-dl
-        sayonara
+        #sayonara
         homebank
         unstable.droidmote
         cached-nix-shell
         gimp-with-plugins
         obsidian
-        master.irpf
+        #master.irpf
         bottles
         #microsoft-edge-beta
-        ventoy-bin
+        #ventoy-bin
         usbimager
         jellyfin-mpv-shim
         jellyfin-media-player
@@ -503,8 +510,8 @@ in
         airshipper
         steam-run
         protontricks
-        unstable.cataclysm-dda
-        endgame-singularity
+        #unstable.cataclysm-dda
+        #endgame-singularity
         mangohud
         openmw
         unstable.gamescope
