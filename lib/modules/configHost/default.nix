@@ -901,5 +901,7 @@ in
       enable = cfg.serveNixStore;
       secretKeyFile = "/home/atila/.ssh/id_nix";
     };
+
+    services.mullvad-vpn.enable = true;
   };
 }
