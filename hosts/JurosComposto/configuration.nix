@@ -18,6 +18,7 @@
     };
 
     isBtrfs = true;
+    isBcachefs = true;
     enablePlex = false;
     enableAdguard = false;
     enableJellyfin = true;

@@ -48,6 +48,10 @@ in
       Does the system contain a btrfs partition?
     '';
 
+    isBcachefs = mkEnableOption ''
+      Does the system contain a bcachefs partition?
+    '';
+
     users = {
       available = mkOption {
         type = with types; attrs;
@@ -302,12 +306,12 @@ in
       "kernel.sysrq"   = 1;
       };
     boot.enableContainers = false;
-    boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ];
+    boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ] ++ (if cfg.isBcachefs then ["bcachefs"] else []);
     boot.kernelParams = [ "quiet" "udev.log_level=3" "preempt=voluntary" ];
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    boot.kernelPackages = cfg.boot.kernelPackage;
+    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
