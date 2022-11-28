@@ -8,10 +8,15 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "sd_mod" "bcache" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  #fileSystems."/mnt/storage/array" =
+    #{ device = "/dev/disk/by-partuuid/2c6b4c12-b72d-2044-a014-cc888f442691:/dev/disk/by-partuuid/0810471b-1adf-4346-9ff9-67ddf371ae2f";
+      #fsType = "bcachefs";
+    #};
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f3818b1f-ad35-4331-8379-7e5987f5e4f5";
@@ -151,5 +156,7 @@
       }
     ];
 
+  hardware.video.hidpi.enable = lib.mkDefault true;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
