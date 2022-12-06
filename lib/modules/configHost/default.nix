@@ -311,7 +311,7 @@ in
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
+    boot.kernelPackages = if cfg.isBcachefs then lib.mkOverride 0 (pkgs.linuxPackagesFor my-nur.bcachefs-kernel-woob-debug) else cfg.boot.kernelPackage;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 

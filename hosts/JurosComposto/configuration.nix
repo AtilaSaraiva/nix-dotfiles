@@ -7,6 +7,7 @@
 {
   imports = [
       ./hardware-configuration.nix
+      #./bcachefs-mount.nix
   ];
 
   hostConfig = {
@@ -220,5 +221,9 @@
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
-    };
+  };
+  services.cron.systemCronJobs = [
+    "@reboot mount -t bcachefs /dev/disk/by-partuuid/2c6b4c12-b72d-2044-a014-cc888f442691:/dev/disk/by-partuuid/0810471b-1adf-4346-9ff9-67ddf371ae2f /mnt/array"
+  ];
+
 }

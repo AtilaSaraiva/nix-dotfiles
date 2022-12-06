@@ -8,6 +8,7 @@
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-2105.url = "github:NixOS/nixpkgs/nixos-21.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nur-bcachefs.url = "github:YellowOnion/nur-bcachefs/master";
   };
 
 
@@ -34,6 +35,13 @@
           config.allowUnfree = true;
         };
       };
+
+      nur-bcachefs-overlay = prev: final: {
+        bcachefs-tools = inputs.nur-bcachefs.bcachefs-tools-woob;
+        bcachefsNur = 
+
+      };
+
       unstable-small-overlay = final: prev: {  # TODO: define these on ./lib/overlays
         unstableSmall = import inputs.nixpkgs-unstable-small {
           system = prev.system;
@@ -53,7 +61,13 @@
         };
       };
       overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay unstable-small-overlay release-2105-overlay master-overlay ]; })
+        ({ ... }: { nixpkgs.overlays = [
+          unstable-overlay
+          unstable-small-overlay
+          release-2105-overlay
+          master-overlay
+          nur-bcachefs-overlay
+        ]; })
       ];
 
       mkHost = hostConfig:
