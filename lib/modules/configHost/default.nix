@@ -399,6 +399,7 @@ in
         unstable.nix-du
         graphviz
         any-nix-shell
+        spotify
 
         ## research
         #jabref
