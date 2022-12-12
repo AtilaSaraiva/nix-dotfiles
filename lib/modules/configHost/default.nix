@@ -520,6 +520,13 @@ in
         mangohud
         openmw
         unstable.gamescope
+        dwarf-fortress-packages.dwarf-fortress-full
+        #(pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
+          #dfVersion = "0.44.11";
+          #theme = "cla";
+          #enableIntro = false;
+          #enableFPS = true;
+        #})
       ];
       in
         (if cfg.packages.useDefault
