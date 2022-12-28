@@ -8,6 +8,14 @@ self: super: rec {
   fobis      = super.python3Packages.callPackage ./fobis { };
   waybar      = super.callPackage ./waybar { };
   monitor-dimensions-calculator      = super.callPackage ./monitor-dimensions-calculator { };
+  bcachefs-tools = super.bcachefs-tools.overrideAttrs (oldAttrs: {
+    version = "unstable-2022-12-21";
+    src = super.fetchgit {
+      url = "https://www.evilpiepirate.org/cgit/bcachefs-tools.git";
+      rev = "0417560649434fc985896c84527fbdadbb06aa42";
+      sha256 = "0whq2xwq9dyn55fkwbgxxjphfixm4q9rrdrsdmnw68l52hwchkc9";
+    };
+  });
   #distrobox = super.distrobox.overrideAttrs (oldAttrs: {
     #version = "unstable-2022-05-25";
     #src = super.fetchFromGitHub {

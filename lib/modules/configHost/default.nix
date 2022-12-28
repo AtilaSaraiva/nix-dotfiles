@@ -472,6 +472,8 @@ in
         # File Browsers
         vifm-full
 
+        bcachefs-tools
+
 
         # Python
         (let
