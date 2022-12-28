@@ -311,7 +311,35 @@ in
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
+    #boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
+    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce (
+      let
+        linux_bcachefs_pkg = {fetchgit, buildLinux, ...} @ args:
+          buildLinux (args // rec {
+            version = "6.1.0";
+            modDirVersion = version;
+
+            src = fetchgit {
+              url = "https://evilpiepirate.org/git/bcachefs.git";
+              rev = "3684119f4f1868f27a56e0c1eb01445dd86ed5df";
+              sha256 = "1wm1h7jkizwhq59f5yqb3fki3q6z99sf95y2s1l5vx7qald4sx70";
+            };
+
+            kernelPatches = [];
+
+            extraConfig = ''
+              CRYPTO_CRC32C_INTEL y
+              BCACHEFS_FS y
+              BCACHEFS_POSIX_ACL y
+            '';
+
+            extraMeta.branch = "6.1";
+          } // (args.argsOverride or {}));
+        linux_bcachefs = pkgs.callPackage linux_bcachefs_pkg{};
+      in
+        pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_bcachefs))
+    else cfg.boot.kernelPackage;
+
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
