@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-bcachefs": {
+      "locked": {
+        "lastModified": 1669778592,
+        "narHash": "sha256-gS2aHNylkP5x3J9m/Mha0ZSKMDmbR5fxLctLANiP6cI=",
+        "owner": "YellowOnion",
+        "repo": "nixpkgs",
+        "rev": "3bee5fd71aef02028a306e6efdbe6fb2bd5f3b8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YellowOnion",
+        "ref": "bcachefs-fix",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-master": {
       "locked": {
         "lastModified": 1672187380,
@@ -84,6 +100,7 @@
       "inputs": {
         "nixpkgs": "nixpkgs",
         "nixpkgs-2105": "nixpkgs-2105",
+        "nixpkgs-bcachefs": "nixpkgs-bcachefs",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-unstable-small": "nixpkgs-unstable-small"
