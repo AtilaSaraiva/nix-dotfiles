@@ -8,6 +8,7 @@
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-2105.url = "github:NixOS/nixpkgs/nixos-21.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-bcachefs.url = "github:YellowOnion/nixpkgs/bcachefs-fix";
   };
 
 
@@ -60,7 +61,10 @@
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;
-          modules = overlayModules ++ nixosModules ++ [ hostConfig ];
+          modules = overlayModules ++ nixosModules ++ [
+            hostConfig
+            "${inputs.nixpkgs-bcachefs}/nixos/modules/tasks/filesystems/bcachefs.nix"
+          ];
         };
 
     in {
