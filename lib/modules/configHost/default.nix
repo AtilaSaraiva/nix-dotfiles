@@ -945,5 +945,7 @@ in
     };
 
     services.mullvad-vpn.enable = true;
+
+    programs.noisetorch.enable = true;
   };
 }
