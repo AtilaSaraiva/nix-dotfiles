@@ -5,6 +5,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  disabledModules = [ "tasks/filesystems/bcachefs.nix" ];
+
   imports = [
       ./hardware-configuration.nix
   ];

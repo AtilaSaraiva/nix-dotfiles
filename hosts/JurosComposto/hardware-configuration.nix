@@ -149,6 +149,12 @@
       options = [ "subvol=@big"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
     };
 
+  fileSystems."/mnt/storage/array" =
+    { device = "f012e88e-6cd0-47d5-88fc-9755584b5522";
+      fsType = "bcachefs";
+      options = [ "nofail" "nobootwait" ];
+    };
+
   swapDevices =
     [ {
     	device = "/dev/disk/by-uuid/109c7ce4-4349-465c-ae89-967db832698d";
