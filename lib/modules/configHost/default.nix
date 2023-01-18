@@ -488,6 +488,7 @@ in
            python-with-my-packages)
 
         # Apps
+        zotero
         calibre
         onlyoffice-bin
         tdesktop
