@@ -429,11 +429,11 @@ in
         any-nix-shell
         spotify
 
-        ## research
+        # research
         #jabref
         texlive.combined.scheme-full
         fpm
-        mendeley
+        #mendeley
         julia-bin
         fobis
 
@@ -513,17 +513,17 @@ in
         element-desktop
         youtube-dl
         #sayonara
-        homebank
+        #homebank
         unstable.droidmote
         cached-nix-shell
         gimp-with-plugins
-        obsidian
+        unstable.obsidian
         #master.irpf
         bottles
         #microsoft-edge-beta
         #ventoy-bin
         usbimager
-        jellyfin-mpv-shim
+        #jellyfin-mpv-shim
         jellyfin-media-player
         keybase-gui
         keybase
