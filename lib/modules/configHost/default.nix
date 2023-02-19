@@ -427,7 +427,8 @@ in
         unstable.nix-du
         graphviz
         any-nix-shell
-        spotify
+        gh
+        openconnect
 
         # research
         #jabref
@@ -466,8 +467,8 @@ in
         brave
 
         # Database
-        sqlite
-        dbeaver
+        #sqlite
+        #dbeaver
 
         # File Browsers
         vifm-full
@@ -488,6 +489,7 @@ in
            python-with-my-packages)
 
         # Apps
+        spotify
         zotero
         calibre
         onlyoffice-bin
@@ -619,11 +621,13 @@ in
           git push
           echo "Please reboot"
         '';
-        edit-os = "nvim /etc/nixos/configuration.nix";
         gc-os = "nix-collect-garbage -d";
         verifyStore = "nix store verify --all --no-trust";
         repairStore = ''
           nix-store --verify --check-contents --repair
+        '';
+        uofa = ''
+          sudo openconnect --protocol=anyconnect --servercert=pin-sha256:oIOESyet47e1GwMKncQkFuJ8JyungURZ57IPuM0cDH8= --server=vpn.ualberta.ca --user=saraivaq
         '';
       };
       shellInit = ''
