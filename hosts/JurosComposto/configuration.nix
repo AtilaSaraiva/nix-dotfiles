@@ -57,8 +57,9 @@
       useDefaultGaming = true;
       extra = with pkgs; [
         unigine-heaven
-        darktable
         anydesk
+        darktable
+        anki
       ];
     };
 
@@ -222,4 +223,5 @@
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
     };
+  boot.initrd.kernelModules = [ "amdgpu" ];
 }

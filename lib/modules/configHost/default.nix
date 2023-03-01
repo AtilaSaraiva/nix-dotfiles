@@ -574,6 +574,8 @@ in
     services.xserver = {
       enable = true;
 
+      videoDrivers = [ "amdgpu" ];
+
       displayManager = {
         gdm = {
           enable = true;
@@ -582,7 +584,6 @@ in
             delay = 5;
           };
         };
-
 
         defaultSession = "sway";
         autoLogin = {
