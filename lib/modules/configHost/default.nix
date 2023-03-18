@@ -797,6 +797,10 @@ in
     };
 
     services.printing.enable = true;
+    services.avahi.enable = true;
+    services.avahi.nssmdns = true;
+    # for a WiFi printer
+    services.avahi.openFirewall = true;
 
     xdg.mime.defaultApplications = {
       "application/pdf" = "zathura";
@@ -870,7 +874,7 @@ in
 
     hardware.sane = {
       enable = true;
-      extraBackends = [ pkgs.hplipWithPlugin ];
+      extraBackends = [ pkgs.hplipWithPlugin pkgs.sane-airscan ];
     };
 
     hardware.bluetooth.enable = true;
