@@ -284,9 +284,9 @@ in
     #nixpkgs.config.permittedInsecurePackages = [
       #"openjdk-18+36"
     #];
-    nixpkgs.config.permittedInsecurePackages = [
-      "qtwebkit-5.212.0-alpha4"
-    ];
+    #nixpkgs.config.permittedInsecurePackages = [
+      #"qtwebkit-5.212.0-alpha4"
+    #];
 
     networking.hostName = cfg.machine.hostName;
     time.timeZone = cfg.machine.timeZone;
@@ -311,34 +311,34 @@ in
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    #boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
-    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce (
-      let
-        linux_bcachefs_pkg = {fetchgit, buildLinux, ...} @ args:
-          buildLinux (args // rec {
-            version = "6.1.0";
-            modDirVersion = version;
+    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
+    #boot.kernelPackages = if cfg.isBcachefs then lib.mkForce (
+      #let
+        #linux_bcachefs_pkg = {fetchgit, buildLinux, ...} @ args:
+          #buildLinux (args // rec {
+            #version = "6.2.0";
+            #modDirVersion = version;
 
-            src = fetchgit {
-              url = "https://evilpiepirate.org/git/bcachefs.git";
-              rev = "3684119f4f1868f27a56e0c1eb01445dd86ed5df";
-              sha256 = "1wm1h7jkizwhq59f5yqb3fki3q6z99sf95y2s1l5vx7qald4sx70";
-            };
+            #src = fetchgit {
+              #url = "https://evilpiepirate.org/git/bcachefs.git";
+              #rev = "993b957fb7c91f6658b0a838a7ef70be7097209a";
+              #sha256 = "0c0igjjwi20nhj85fnvr8cd62sfh6r39pxci0zya3gq44zxfblr5";
+            #};
 
-            kernelPatches = [];
+            #kernelPatches = [];
 
-            extraConfig = ''
-              CRYPTO_CRC32C_INTEL y
-              BCACHEFS_FS y
-              BCACHEFS_POSIX_ACL y
-            '';
+            #extraConfig = ''
+              #CRYPTO_CRC32C_INTEL y
+              #BCACHEFS_FS y
+              #BCACHEFS_POSIX_ACL y
+            #'';
 
-            extraMeta.branch = "6.1";
-          } // (args.argsOverride or {}));
-        linux_bcachefs = pkgs.callPackage linux_bcachefs_pkg{};
-      in
-        pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_bcachefs))
-    else cfg.boot.kernelPackage;
+            #extraMeta.branch = "6.1";
+          #} // (args.argsOverride or {}));
+        #linux_bcachefs = pkgs.callPackage linux_bcachefs_pkg{};
+      #in
+        #pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_bcachefs))
+    #else cfg.boot.kernelPackage;
 
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
@@ -374,7 +374,7 @@ in
 
         # System tools
         (pkgs.writeShellScriptBin "nixf" ''
-          exec ${pkgs.nixVersions.nix_2_9}/bin/nix --experimental-features "nix-command flakes" "$@"
+          exec ${pkgs.nixVersions.nix_2_14}/bin/nix --experimental-features "nix-command flakes" "$@"
         '')
         wget
         vulkan-tools
@@ -409,7 +409,7 @@ in
         radeontop
         unstable.btdu
         nix-prefetch-scripts
-        qjackctl
+        #qjackctl
         nox
         unstable.distrobox
         cage
@@ -423,7 +423,7 @@ in
         file
         cheat
         imv
-        rssguard
+        #rssguard
         unstable.nix-du
         graphviz
         any-nix-shell
@@ -448,7 +448,7 @@ in
         xdragon
         poppler_utils
         ffmpegthumbnailer
-        wkhtmltopdf
+        #wkhtmltopdf
         imagemagick
 
         # Image viewers
@@ -464,7 +464,7 @@ in
         firefox-wayland
         qutebrowser
         google-chrome
-        brave
+        #brave
 
         # Database
         #sqlite
@@ -495,7 +495,7 @@ in
         onlyoffice-bin
         tdesktop
         dropbox
-        megasync
+        #megasync
         keepassxc
         bitwarden
         unstable.kotatogram-desktop
@@ -517,14 +517,14 @@ in
         #sayonara
         #homebank
         unstable.droidmote
-        cached-nix-shell
+        #cached-nix-shell
         gimp-with-plugins
         unstable.obsidian
         #master.irpf
         bottles
         #microsoft-edge-beta
         #ventoy-bin
-        usbimager
+        #usbimager
         #jellyfin-mpv-shim
         jellyfin-media-player
         keybase-gui
@@ -541,8 +541,8 @@ in
         lutris
         openssl
         opusfile
-        unstable.yuzu-ea
-        unstable.rpcs3
+        #yuzu-ea
+        rpcs3
         pcsx2
         wine64Packages.stagingFull
         airshipper
@@ -659,7 +659,7 @@ in
 
     services.auto-cpufreq.enable = cfg.isLaptop;
 
-    qt5.platformTheme = "qt5ct";
+    qt.platformTheme = "qt5ct";
 
     services.lorri.enable = true;
     services.locate = {
@@ -825,8 +825,10 @@ in
             type = "rsa";
           }
         ];
-        forwardX11 = true;
-        passwordAuthentication = false;
+        settings = {
+          X11Forwarding = true;
+          PasswordAuthentication = false;
+        };
     };
 
     users.users = cfg.users.available;
