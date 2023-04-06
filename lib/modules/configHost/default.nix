@@ -585,14 +585,14 @@ in
           };
         };
 
-        defaultSession = "sway";
+        #defaultSession = "plasma5";
         autoLogin = {
           enable = true;
           user = "atila";
         };
       };
 
-      #desktopManager.cinnamon.enable = true;
+      desktopManager.plasma5.enable = true;
 
       libinput.enable = true;
 
@@ -659,7 +659,7 @@ in
 
     services.auto-cpufreq.enable = cfg.isLaptop;
 
-    qt.platformTheme = "qt5ct";
+    #qt.platformTheme = "qt5ct";
 
     services.lorri.enable = true;
     services.locate = {
@@ -750,7 +750,7 @@ in
     };
 
     programs.sway = {
-      enable = true;
+      enable = false;
       wrapperFeatures.gtk = true; # so that gtk works properly
       extraPackages = with pkgs; let
         defaultPackages = [
