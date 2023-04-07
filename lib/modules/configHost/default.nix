@@ -840,6 +840,8 @@ in
       enableNotifications = true;
     };
 
+    services.udisks2.enable = true;
+
     networking = {
       networkmanager = {
         enable = true;
