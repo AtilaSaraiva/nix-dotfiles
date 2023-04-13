@@ -429,6 +429,7 @@ in
         any-nix-shell
         gh
         openconnect
+        animedownloader
 
         # research
         #jabref
