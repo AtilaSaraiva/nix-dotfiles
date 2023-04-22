@@ -879,7 +879,16 @@ in
 
     hardware.sane = {
       enable = true;
-      extraBackends = [ pkgs.hplipWithPlugin pkgs.sane-airscan ];
+      brscan5 = {
+        enable = true;
+        netDevices = {
+          brother = {
+            ip = "10.0.0.132";
+            model = "DCP-L2550DW";
+          };
+        };
+      };
+      extraBackends = [ pkgs.sane-airscan ];
     };
 
     hardware.bluetooth.enable = true;
