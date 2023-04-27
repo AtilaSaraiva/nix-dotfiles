@@ -533,6 +533,7 @@ in
         scrcpy
         kopia
         monitor-dimensions-calculator
+        transmission-qt
       ];
 
       defaultGaming = [
