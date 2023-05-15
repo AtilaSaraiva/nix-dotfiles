@@ -307,7 +307,7 @@ in
       };
     boot.enableContainers = false;
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ] ++ (if cfg.isBcachefs then ["bcachefs"] else []);
-    boot.kernelParams = [ "quiet" "udev.log_level=3" "preempt=voluntary" ];
+    boot.kernelParams = [ "quiet" "udev.log_level=3" "preempt=voluntary" "intel_iommu=on" "iommu=pt" ];
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
@@ -798,7 +798,11 @@ in
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
 
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+      startWhenNeeded = false;
+      browsing = false;
+    };
     services.avahi.enable = true;
     services.avahi.nssmdns = true;
     # for a WiFi printer
