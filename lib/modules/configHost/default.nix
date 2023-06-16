@@ -192,12 +192,10 @@ in
       default = { };
       example = {
         home = {
-          subvolume = "/home";
-          extraConfig = ''
-            ALLOW_USERS="atila"
-            TIMELINE_CREATE=yes
-            TIMELINE_CLEANUP=yes
-          '';
+          SUBVOLUME = "/home";
+          ALLOW_USERS = [ "atila" ];
+          TIMELINE_CREATE = true;
+          TIMELINE_CLEANUP = true;
         };
       };
     };
@@ -292,9 +290,9 @@ in
     time.timeZone = cfg.machine.timeZone;
     system.stateVersion = cfg.machine.stateVersion;
 
-    boot.tmpOnTmpfs = cfg.boot.tmpOnTmpfs;
-    boot.cleanTmpDir = !cfg.boot.tmpOnTmpfs;
-    boot.tmpOnTmpfsSize = "400%";
+    boot.tmp.useTmpfs = cfg.boot.tmpOnTmpfs;
+    boot.tmp.cleanOnBoot = !cfg.boot.tmpOnTmpfs;
+    boot.tmp.tmpfsSize = "400%";
     boot.loader.systemd-boot.enable = cfg.boot.loader.systemdBoot.enable;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = cfg.boot.loader.systemdBoot.timeout;
@@ -359,7 +357,7 @@ in
       enable = cfg.enableJellyfin;
       user = "atila";
       openFirewall = true;
-      package = pkgs.unstable.jellyfin;
+      package = pkgs.jellyfin;
     };
 
     security.pam.loginLimits = [
@@ -407,11 +405,11 @@ in
         libxfs
         duf
         radeontop
-        unstable.btdu
+        btdu
         nix-prefetch-scripts
         #qjackctl
         nox
-        unstable.distrobox
+        distrobox
         cage
         binutils
         nixpkgs-fmt
@@ -424,7 +422,7 @@ in
         cheat
         imv
         #rssguard
-        unstable.nix-du
+        nix-du
         graphviz
         any-nix-shell
         gh
@@ -499,13 +497,13 @@ in
         #megasync
         keepassxc
         bitwarden
-        unstable.kotatogram-desktop
+        #kotatogram-desktop
         zathura
         font-manager
         gnome.gucharmap
         mpv
         buku
-        unstable.oil-buku
+        oil-buku
         libsForQt5.okular
         qbittorrent
         xournalpp
@@ -517,10 +515,10 @@ in
         youtube-dl
         #sayonara
         #homebank
-        unstable.droidmote
+        droidmote
         #cached-nix-shell
         gimp-with-plugins
-        unstable.obsidian
+        obsidian
         #master.irpf
         bottles
         #microsoft-edge-beta
@@ -554,7 +552,7 @@ in
         #endgame-singularity
         mangohud
         openmw
-        unstable.gamescope
+        gamescope
         dwarf-fortress-packages.dwarf-fortress-full
         #(pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
           #dfVersion = "0.44.11";
@@ -765,8 +763,8 @@ in
         sway-contrib.grimshot
         mako # notification daemon
         kitty # Alacritty is the default terminal in the config
-        autotiling
         waybar
+        autotiling
         wlsunset
         xfce.thunar
         jq

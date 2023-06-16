@@ -3,13 +3,13 @@
 
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-bcachefs.url = "github:YellowOnion/nixpkgs/bcachefs-fix";
   };
 
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
 
     let
 
@@ -26,21 +26,22 @@
           (builtins.attrNames (builtins.readDir dir))
       ) ./lib/modules;
 
-      unstable-overlay = final: prev: {  # TODO: define these on ./lib/overlays
-        unstable = import inputs.nixpkgs-unstable {
-          system = prev.system;
-          config.allowUnfree = true;
-        };
-      };
-      overlayModules = [
-        ({ ... }: { nixpkgs.overlays = [ unstable-overlay ]; })
-      ];
+      #unstable-overlay = final: prev: {  # TODO: define these on ./lib/overlays
+        #unstable = import inputs.nixpkgs-unstable {
+          #system = prev.system;
+          #config.allowUnfree = true;
+        #};
+      #};
+      #overlayModules = [
+        #({ ... }: { nixpkgs.overlays = [ unstable-overlay ]; })
+      #];
 
       mkHost = hostConfig:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;
-          modules = overlayModules ++ nixosModules ++ [
+          #modules = overlayModules ++ nixosModules ++ [
+          modules = nixosModules ++ [
             hostConfig
             "${inputs.nixpkgs-bcachefs}/nixos/modules/tasks/filesystems/bcachefs.nix"
           ];

@@ -65,36 +65,28 @@
 
     snapperExtraDir = {
       home = {
-          subvolume = "/home";
-          extraConfig = ''
-            ALLOW_USERS="atila"
-            TIMELINE_CREATE=yes
-            TIMELINE_CLEANUP=yes
-          '';
+        SUBVOLUME = "/home";
+        ALLOW_USERS = [ "atila" ];
+        TIMELINE_CREATE=true;
+        TIMELINE_CLEANUP=true;
       };
       documentos = {
-        subvolume = "/home/atila/Files/Documentos/";
-        extraConfig = ''
-          ALLOW_USERS="atila"
-          TIMELINE_CREATE=yes
-          TIMELINE_CLEANUP=yes
-        '';
+        SUBVOLUME = "/home/atila/Files/Documentos/";
+        ALLOW_USERS= [ "atila" ];
+        TIMELINE_CREATE=true;
+        TIMELINE_CLEANUP=true;
       };
       imagens = {
-        subvolume = "/home/atila/Files/Imagens/";
-        extraConfig = ''
-          ALLOW_USERS="atila"
-          TIMELINE_CREATE=yes
-          TIMELINE_CLEANUP=yes
-        '';
+        SUBVOLUME = "/home/atila/Files/Imagens/";
+        ALLOW_USERS= [ "atila" ];
+        TIMELINE_CREATE=true;
+        TIMELINE_CLEANUP=true;
       };
       codes = {
-        subvolume = "/home/atila/Files/Códigos/";
-        extraConfig = ''
-          ALLOW_USERS="atila"
-          TIMELINE_CREATE=yes
-          TIMELINE_CLEANUP=yes
-        '';
+        SUBVOLUME = "/home/atila/Files/Códigos/";
+        ALLOW_USERS= [ "atila" ];
+        TIMELINE_CREATE=true;
+        TIMELINE_CLEANUP=true;
       };
     };
   };
