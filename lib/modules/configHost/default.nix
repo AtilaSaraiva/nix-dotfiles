@@ -40,7 +40,7 @@ in
       autoUpgrade = mkOption {
         description = "Automatically upgrade de system?";
         type = with types; bool;
-        default = true;
+        default = false;
       };
     };
 
