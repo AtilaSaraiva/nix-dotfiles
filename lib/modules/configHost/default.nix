@@ -800,6 +800,7 @@ in
       enable = true;
       startWhenNeeded = false;
       browsing = false;
+      drivers = [ pkgs.brlaser ];
     };
     services.avahi.enable = true;
     services.avahi.nssmdns = true;
