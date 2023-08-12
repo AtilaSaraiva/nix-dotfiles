@@ -936,6 +936,12 @@ in
       };
     };
 
+    programs.singularity = {
+      enable = true;
+      enableSuid = true;
+      enableFakeroot = true;
+    };
+
     hardware.opengl.extraPackages = with pkgs; [ # TODO: create an option for amdgpus
         rocm-opencl-icd
         amdvlk
