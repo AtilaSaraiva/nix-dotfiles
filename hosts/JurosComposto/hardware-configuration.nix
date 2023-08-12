@@ -151,7 +151,7 @@
 
   swapDevices =
     [ {
-    	device = "/dev/disk/by-uuid/109c7ce4-4349-465c-ae89-967db832698d";
+    	device = "/dev/disk/by-uuid/40d39eb7-4297-4e6a-8055-814f99f3b055";
     	priority = 5;
       }
     ];
