@@ -13,11 +13,6 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  #fileSystems."/mnt/storage/array" =
-    #{ device = "/dev/disk/by-partuuid/2c6b4c12-b72d-2044-a014-cc888f442691:/dev/disk/by-partuuid/0810471b-1adf-4346-9ff9-67ddf371ae2f";
-      #fsType = "bcachefs";
-    #};
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f3818b1f-ad35-4331-8379-7e5987f5e4f5";
       fsType = "btrfs";
@@ -30,69 +25,15 @@
       options = [ "subvol=@home" "discard=async" "space_cache=v2" "compress-force=zstd:4" ];
     };
 
-  fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/f3818b1f-ad35-4331-8379-7e5987f5e4f5";
-      fsType = "btrfs";
-      options = [ "subvol=@swap" "discard=async" "space_cache=v2" "compress-force=zstd:4" ];
-    };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/B10A-B619";
       fsType = "vfat";
     };
 
-  fileSystems."/home/atila/Files/Imagens" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Imagens" "autodefrag" "compress-force=zstd:9" "space_cache=v2"];
-    };
-
-  fileSystems."/home/atila/Files/Códigos" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Códigos"  "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Mangas" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Mangas" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Músicas" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Músicas" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Documentos" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Documentos" "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Comics" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Comics" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Biblioteca-Calibre" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Biblioteca-Calibre" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
   fileSystems."/home/atila/Games" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
+    { device = "/dev/disk/by-uuid/111c9c9a-130f-4840-be07-5a6414cd5296";
       fsType = "btrfs";
-      options = [ "subvol=@games" "autodefrag"  "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/mnt/Games/hd1tb" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
-      fsType = "btrfs";
-      options = [ "subvol=@games" "autodefrag"  "compress-force=zstd:9" "space_cache=v2"];
+      options = [ "subvol=@games" "autodefrag"  "compress-force=zstd:2" "space_cache=v2" ];
     };
 
   fileSystems."/home/atila/Games/nvme" =
@@ -101,34 +42,15 @@
       options = [ "subvol=@games" "nofail" "discard=async" "space_cache=v2" "compress-force=zstd:4" ];
     };
 
-  fileSystems."/mnt/Games/nvme" =
-    { device = "/dev/disk/by-uuid/f3818b1f-ad35-4331-8379-7e5987f5e4f5";
+  fileSystems."/home/atila/Files" =
+    { device = "/dev/disk/by-uuid/2d116175-d8cf-4b70-bb02-1e57927cc982";
       fsType = "btrfs";
-      options = [ "subvol=@games" "nofail" "discard=async" "space_cache=v2" "compress-force=zstd:4" ];
+      options = [ "subvol=@files" "autodefrag" "nofail" "space_cache=v2" "compress-force=zstd:9" ];
     };
-
-  fileSystems."/home/atila/Games/Prefixes" =
-    { device = "/dev/disk/by-uuid/c9231e4e-4002-4a31-be7b-75c4c7b5760e";
+  fileSystems."/home/atila/Files/storage" =
+    { device = "/dev/disk/by-uuid/111c9c9a-130f-4840-be07-5a6414cd5296";
       fsType = "btrfs";
-      options = [ "subvol=@prefixes" "autodefrag" "compress-force=zstd:9" "space_cache=v2" ];
-    };
-
-  fileSystems."/home/atila/Files/Downloads" =
-    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Downloads" "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
-    };
-
-  fileSystems."/home/atila/Files/Downloads-torrents" =
-    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Downloads-torrent" "autodefrag"  "nofail" "space_cache=v2" "compress=lzo" ];
-    };
-
-  fileSystems."/home/atila/Files/Anime" =
-    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
-      fsType = "btrfs";
-      options = [ "subvol=files/@Anime"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
+      options = [ "subvol=@storage" "autodefrag" "nofail" "space_cache=v2" "compress-force=zstd:2" ];
     };
 
   fileSystems."/mnt/storage" =
@@ -137,24 +59,12 @@
       options = [ "subvol=storage"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
     };
 
-  fileSystems."/home/atila/Games/big" =
-    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
-      fsType = "btrfs";
-      options = [ "subvol=@big"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
-    };
-
-  fileSystems."/mnt/Games/big" =
-    { device = "/dev/disk/by-uuid/34081a37-6fb1-418a-9d88-427d1e866d6c";
-      fsType = "btrfs";
-      options = [ "subvol=@big"  "autodefrag" "nofail" "space_cache=v2" "compress=lzo" ];
-    };
-
-  swapDevices =
-    [ {
-    	device = "/dev/disk/by-uuid/40d39eb7-4297-4e6a-8055-814f99f3b055";
-    	priority = 5;
-      }
-    ];
+  #swapDevices =
+    #[ {
+            #device = "/dev/disk/by-uuid/40d39eb7-4297-4e6a-8055-814f99f3b055";
+            #priority = 5;
+      #}
+    #];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
