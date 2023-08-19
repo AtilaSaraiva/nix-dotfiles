@@ -487,6 +487,9 @@ in
         in
            python-with-my-packages)
 
+        # nodejs
+        nodejs
+
         # Apps
         spotify
         zotero
