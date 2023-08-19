@@ -462,7 +462,7 @@ in
         # Browsers
         firefox-wayland
         qutebrowser
-        google-chrome
+        ungoogled-chromium
         #brave
 
         # Database
