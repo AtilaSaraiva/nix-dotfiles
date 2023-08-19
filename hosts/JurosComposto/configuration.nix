@@ -71,19 +71,7 @@
         TIMELINE_CLEANUP=true;
       };
       documentos = {
-        SUBVOLUME = "/home/atila/Files/Documentos/";
-        ALLOW_USERS= [ "atila" ];
-        TIMELINE_CREATE=true;
-        TIMELINE_CLEANUP=true;
-      };
-      imagens = {
-        SUBVOLUME = "/home/atila/Files/Imagens/";
-        ALLOW_USERS= [ "atila" ];
-        TIMELINE_CREATE=true;
-        TIMELINE_CLEANUP=true;
-      };
-      codes = {
-        SUBVOLUME = "/home/atila/Files/Códigos/";
+        SUBVOLUME = "/home/atila/Files";
         ALLOW_USERS= [ "atila" ];
         TIMELINE_CREATE=true;
         TIMELINE_CLEANUP=true;
@@ -216,4 +204,13 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     };
   boot.initrd.kernelModules = [ "amdgpu" ];
+
+
+  environment.etc."tmpfiles.d/bcache.conf" = {
+    text = ''
+      w /sys/block/bcache0/bcache/sequential_cutoff                    - - - - 0
+      w /sys/block/bcache0/queue/read_ahead_kb                         - - - - 16348
+      w /sys/fs/bcache/40917d3a-093d-426b-91a0-7f1c44471562/congested_read_threshold_us    - - - - 0
+    '';
+  };
 }
