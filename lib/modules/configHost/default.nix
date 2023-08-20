@@ -428,6 +428,7 @@ in
         gh
         openconnect
         animedownloader
+        conda
 
         # research
         #jabref
