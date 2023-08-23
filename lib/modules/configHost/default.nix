@@ -429,13 +429,14 @@ in
         openconnect
         animedownloader
         conda
+        glxinfo
 
         # research
         #jabref
         texlive.combined.scheme-full
         fpm
         #mendeley
-        julia-bin
+        julia
         fobis
 
         # lf
@@ -670,6 +671,7 @@ in
       enable = true;
       localuser = "atila";
       pruneBindMounts = false;
+      interval = "hourly";
     };
 
     services.snapper.configs =
