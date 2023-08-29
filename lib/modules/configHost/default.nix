@@ -430,6 +430,7 @@ in
         animedownloader
         conda
         glxinfo
+        entr
 
         # research
         #jabref
