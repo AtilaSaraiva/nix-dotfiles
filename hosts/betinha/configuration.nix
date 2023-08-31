@@ -20,7 +20,7 @@
 
     isBtrfs = false;
     enablePlex = false;
-    isLaptop = true;
+    isLaptop = false;
 
     users.available = {
       atila = {
@@ -37,7 +37,7 @@
     boot = {
       useOSProber = false;
       #kernelPackage = pkgs.linuxPackages;
-      tmpOnTmpfs = false;
+      tmpOnTmpfs = true;
     };
 
     packages = {
