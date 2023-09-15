@@ -665,6 +665,8 @@ in
 
     services.auto-cpufreq.enable = cfg.isLaptop;
 
+    services.tailscale.enable = true;
+
     qt.platformTheme = "qt5ct";
 
     services.lorri.enable = true;
