@@ -828,6 +828,11 @@ in
       enableSSHSupport = true;
     };
 
+    programs.ssh = {
+      setXAuthLocation = true;
+    };
+
+
     services.openssh = {
         enable = true;
         ports = [
@@ -844,6 +849,7 @@ in
         settings = {
           X11Forwarding = true;
           PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
         };
     };
 
