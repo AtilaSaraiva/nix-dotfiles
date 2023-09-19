@@ -667,6 +667,8 @@ in
 
     services.tailscale.enable = true;
 
+    programs.mosh.enable = true;
+
     qt.platformTheme = "qt5ct";
 
     services.lorri.enable = true;
