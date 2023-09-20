@@ -494,6 +494,7 @@ in
         nodejs
 
         # Apps
+        mumble
         spotify
         zotero
         calibre
@@ -888,6 +889,11 @@ in
     hardware.pulseaudio.enable = false;
 
     security.rtkit.enable = true;
+
+    services.murmur = {
+      enable = true;
+      openFirewall = true;
+    };
 
     environment.etc = let
       json = pkgs.formats.json {};
