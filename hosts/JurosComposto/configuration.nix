@@ -213,4 +213,14 @@
       w /sys/fs/bcache/40917d3a-093d-426b-91a0-7f1c44471562/congested_read_threshold_us    - - - - 0
     '';
   };
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      # ... existing hosts config etc. ...
+      "binarycache.com" = {
+        locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+      };
+    };
+  };
 }

@@ -1039,7 +1039,7 @@ in
 
     services.nix-serve = {
       enable = cfg.serveNixStore;
-      secretKeyFile = "/home/atila/.ssh/id_nix";
+      secretKeyFile = "/home/atila/.ssh/cache-priv-key.pem";
     };
 
     services.mullvad-vpn.enable = true;
