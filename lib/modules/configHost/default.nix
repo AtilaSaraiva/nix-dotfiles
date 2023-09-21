@@ -766,32 +766,32 @@ in
       wrapperFeatures.gtk = true; # so that gtk works properly
       extraPackages = with pkgs; let
         defaultPackages = [
-        swaylock
-        xwayland
-        swayidle
-        swaytools
-        wf-recorder
-        wl-clipboard
-        sway-contrib.grimshot
-        mako # notification daemon
-        kitty # Alacritty is the default terminal in the config
-        waybar
-        autotiling
-        wlsunset
-        xfce.thunar
-        jq
-        playerctl
-        wev
-        sirula
-        lxappearance
-        adapta-gtk-theme
-        gnome.adwaita-icon-theme
-        wdisplays
-      ];
-      laptopPackages = [
-        brightnessctl
-        acpi
-      ];
+          swaylock-effects
+          xwayland
+          swayidle
+          swaytools
+          wf-recorder
+          wl-clipboard
+          sway-contrib.grimshot
+          mako # notification daemon
+          kitty # Alacritty is the default terminal in the config
+          waybar
+          autotiling
+          wlsunset
+          xfce.thunar
+          jq
+          playerctl
+          wev
+          sirula
+          lxappearance
+          adapta-gtk-theme
+          gnome.adwaita-icon-theme
+          wdisplays
+        ];
+        laptopPackages = [
+          brightnessctl
+          acpi
+        ];
       in
       (if cfg.isLaptop then laptopPackages else [ ])
       ++ defaultPackages;
