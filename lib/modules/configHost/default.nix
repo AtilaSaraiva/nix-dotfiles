@@ -525,6 +525,7 @@ in
         droidmote
         #cached-nix-shell
         gimp-with-plugins
+        pinta
         obsidian
         #master.irpf
         bottles
