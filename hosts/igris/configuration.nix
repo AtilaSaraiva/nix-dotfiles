@@ -116,4 +116,9 @@
     programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
   };
 
+  virtualisation = {
+    libvirtd = {
+        enable = true;
+    };
+  };
 }
