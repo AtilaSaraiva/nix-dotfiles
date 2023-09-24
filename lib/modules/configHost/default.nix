@@ -967,16 +967,6 @@ in
         dockerCompat = true;
         dockerSocket.enable = true;
       };
-      virtualbox = {
-        host = {
-          enable = true;
-          enableExtensionPack = true;
-        };
-        guest = {
-          enable = true;
-          x11 = true;
-        };
-      };
     };
 
     programs.singularity = {
