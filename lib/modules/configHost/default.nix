@@ -671,6 +671,23 @@ in
 
     services.auto-cpufreq.enable = cfg.isLaptop;
 
+    services.thinkfan = {
+      enable = cfg.isLaptop;
+      levels = [
+        [ 0 0 55 ]
+        [ 1 48 60 ]
+        [ 2 50 61 ]
+        [ 3 52 63 ]
+        [ 6 56 65 ]
+        [ 7 60 85 ]
+        [
+          "level auto"
+          80
+          32767
+        ]
+      ];
+    };
+
     services.tailscale.enable = true;
 
     services.webdav = {
