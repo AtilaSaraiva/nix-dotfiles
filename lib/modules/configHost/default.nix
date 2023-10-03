@@ -875,7 +875,7 @@ in
 
     users.users = cfg.users.available;
 
-    services.logind.lidSwitch = "suspend-then-hibernate";
+    services.logind.lidSwitch = "suspend";
 
     services.earlyoom = {
       enable = true;
