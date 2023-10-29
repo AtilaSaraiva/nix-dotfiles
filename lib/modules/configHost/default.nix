@@ -302,6 +302,8 @@ in
       "abi.vsyscall32" = 0;
       "vm.swappiness"  = 7;
       "kernel.sysrq"   = 1;
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
       };
     boot.enableContainers = false;
     boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ] ++ (if cfg.isBcachefs then ["bcachefs"] else []);
