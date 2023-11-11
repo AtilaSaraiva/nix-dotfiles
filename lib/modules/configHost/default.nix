@@ -982,6 +982,7 @@ in
         libvdpau-va-gl
         libva
     ];
+    programs.steam.enable = cfg.packages.useDefaultGaming;
     hardware.steam-hardware.enable = true;
 
     # Rule to increase polling rate of dualshock 4 to reduce input lag
