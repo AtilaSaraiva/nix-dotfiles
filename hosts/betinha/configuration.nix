@@ -41,10 +41,7 @@
     };
 
     packages = {
-      useDefaultGaming = false;
-      extra = with pkgs; [
-        zeroad
-      ];
+      useDefaultGaming = true;
     };
 
   };
