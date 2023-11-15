@@ -486,6 +486,7 @@ in
                pynvim
                matplotlib
                numpy
+               notebook
             #other python packages you want
            ];
            python-with-my-packages = python3.withPackages my-python-packages;
