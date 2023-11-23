@@ -500,6 +500,7 @@ in
         mumble
         spotify
         zotero
+        termpdfpy
         calibre
         onlyoffice-bin
         tdesktop
