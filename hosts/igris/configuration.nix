@@ -16,7 +16,6 @@
       hostName = "igris";
       stateVersion = "21.11";
       autoUpgrade = false;
-      timeZone = "America/Bahia";
     };
 
     isBtrfs = false;
