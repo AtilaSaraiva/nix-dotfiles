@@ -8,6 +8,7 @@ self: super: rec {
   fobis      = super.python3Packages.callPackage ./fobis { };
   monitor-dimensions-calculator      = super.callPackage ./monitor-dimensions-calculator { };
   animedownloader     = super.python3Packages.callPackage ./animedownloader { };
+  sirula = super.callPackage ./sirula { };
   #bcachefs-tools = super.bcachefs-tools.overrideAttrs (oldAttrs: {
     #version = "unstable-2023-03-19";
     #src = super.fetchgit {
