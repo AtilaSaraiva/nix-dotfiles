@@ -3,9 +3,8 @@
 
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-bcachefs.url = "github:YellowOnion/nixpkgs/bcachefs-fix";
   };
 
 
@@ -43,7 +42,6 @@
           #modules = overlayModules ++ nixosModules ++ [
           modules = nixosModules ++ [
             hostConfig
-            "${inputs.nixpkgs-bcachefs}/nixos/modules/tasks/filesystems/bcachefs.nix"
           ];
         };
 
