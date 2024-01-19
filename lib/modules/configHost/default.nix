@@ -48,10 +48,6 @@ in
       Does the system contain a btrfs partition?
     '';
 
-    isBcachefs = mkEnableOption ''
-      Does the system contain a bcachefs partition?
-    '';
-
     users = {
       available = mkOption {
         type = with types; attrs;
@@ -306,40 +302,12 @@ in
       "net.ipv6.conf.all.forwarding" = 1;
       };
     boot.enableContainers = false;
-    boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" ] ++ (if cfg.isBcachefs then ["bcachefs"] else []);
+    boot.supportedFilesystems = [ "btrfs" "xfs" "ntfs" "f2fs" ];
     boot.kernelParams = [ "quiet" "udev.log_level=3" "preempt=voluntary" "intel_iommu=on" "iommu=pt" ];
     # Silent boot
     boot.initrd.verbose = false;
     boot.consoleLogLevel = 0;
-    boot.kernelPackages = if cfg.isBcachefs then lib.mkForce pkgs.linuxPackages_testing_bcachefs else cfg.boot.kernelPackage;
-    #boot.kernelPackages = if cfg.isBcachefs then lib.mkForce (
-      #let
-        #linux_bcachefs_pkg = {fetchgit, buildLinux, ...} @ args:
-          #buildLinux (args // rec {
-            #version = "6.2.0";
-            #modDirVersion = version;
-
-            #src = fetchgit {
-              #url = "https://evilpiepirate.org/git/bcachefs.git";
-              #rev = "993b957fb7c91f6658b0a838a7ef70be7097209a";
-              #sha256 = "0c0igjjwi20nhj85fnvr8cd62sfh6r39pxci0zya3gq44zxfblr5";
-            #};
-
-            #kernelPatches = [];
-
-            #extraConfig = ''
-              #CRYPTO_CRC32C_INTEL y
-              #BCACHEFS_FS y
-              #BCACHEFS_POSIX_ACL y
-            #'';
-
-            #extraMeta.branch = "6.1";
-          #} // (args.argsOverride or {}));
-        #linux_bcachefs = pkgs.callPackage linux_bcachefs_pkg{};
-      #in
-        #pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_bcachefs))
-    #else cfg.boot.kernelPackage;
-
+    boot.kernelPackages = cfg.boot.kernelPackage;
     boot.extraModulePackages = cfg.boot.extraModulePackages;
     boot.blacklistedKernelModules = cfg.boot.blacklistedKernelModules;
 
@@ -396,7 +364,6 @@ in
         rpi-imager
         ncdu
         ripgrep
-        #mate.pluma
         rmlint
         podman-compose
         smartmontools
@@ -409,7 +376,6 @@ in
         radeontop
         btdu
         nix-prefetch-scripts
-        #qjackctl
         nox
         distrobox
         cage
@@ -423,7 +389,6 @@ in
         file
         cheat
         imv
-        #rssguard
         nix-du
         graphviz
         any-nix-shell
@@ -435,10 +400,8 @@ in
         entr
 
         # research
-        #jabref
         texlive.combined.scheme-full
         fpm
-        #mendeley
         julia
         fobis
 
@@ -468,7 +431,6 @@ in
         firefox-wayland
         qutebrowser
         ungoogled-chromium
-        #brave
 
         # Database
         #sqlite
@@ -509,7 +471,6 @@ in
         #megasync
         keepassxc
         bitwarden
-        #kotatogram-desktop
         zathura
         font-manager
         gnome.gucharmap
@@ -525,16 +486,11 @@ in
         libreoffice-fresh
         element-desktop
         youtube-dl
-        #sayonara
-        #homebank
         droidmote
-        #cached-nix-shell
         gimp-with-plugins
         pinta
         obsidian
-        #master.irpf
         bottles
-        #microsoft-edge-beta
         #ventoy-bin
         #usbimager
         #jellyfin-mpv-shim
@@ -563,7 +519,6 @@ in
         steam-run
         protontricks
         #unstable.cataclysm-dda
-        #endgame-singularity
         mangohud
         openmw
         gamescope
