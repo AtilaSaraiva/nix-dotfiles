@@ -932,6 +932,8 @@ in
         #allowedTCPPorts = [ ... ];
         #allowedUDPPorts = [ ... ];
       };
+      resolvconf.enable = true;
+      useDHCP = false;
     };
 
     # Enable sound.
@@ -1088,7 +1090,7 @@ in
       secretKeyFile = "/home/atila/.ssh/cache-priv-key.pem";
     };
 
-    services.mullvad-vpn.enable = true;
+    #services.mullvad-vpn.enable = true;
 
     programs.noisetorch.enable = true;
   };
