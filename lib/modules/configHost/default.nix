@@ -501,6 +501,7 @@ in
         spotify
         zotero
         termpdfpy
+        sage
         calibre
         onlyoffice-bin
         tdesktop
@@ -549,6 +550,7 @@ in
       defaultGaming = [
         # Gaming
         zeroad
+        forge-mtg
         minetest
         lutris
         openssl
@@ -1054,6 +1056,13 @@ in
     #services.undervolt.gpuOffset = 50;
     programs.corectrl.enable = true;
     programs.corectrl.gpuOverclock.enable = true;
+
+
+    services.xrdp = {
+      enable = true;
+      defaultWindowManager = "sway";
+      openFirewall = true;
+    };
 
     programs.msmtp.setSendmail = true;
     services.smartd.enable = true;
