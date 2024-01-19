@@ -712,7 +712,7 @@ in
         keep-derivations = true
         experimental-features = nix-command flakes
       '';
-      package = pkgs.nixUnstable;
+      package = pkgs.nix;
       settings = {
         trusted-users = [ "@wheel" ];
         auto-optimise-store = true;
@@ -799,6 +799,18 @@ in
     xdg.portal = {
       wlr.enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config = {
+        common = {
+          default = [
+            "gtk"
+          ];
+        };
+        sway = {
+          default = [
+            "wlr"
+          ];
+        };
+      };
     };
 
     services.printing = {
