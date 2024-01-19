@@ -91,11 +91,6 @@
     #'';
   #};
 
-  nix.settings = {
-    #require-sigs = false;
-    #substituters = [ "http://10.0.0.165:5000" "http://10.100.0.202:5000" ];
-  };
-
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
@@ -114,6 +109,20 @@
       })
     ];
     programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
+  };
+
+  nix = {
+    settings = {
+      substituters = [
+        "http://juroscomposto:5000/"
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "binarycache.com:F14RK+znP8o15IWh7ObV/gGDqif1cfddFbLHWh6BgCI="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
   };
 
   virtualisation = {

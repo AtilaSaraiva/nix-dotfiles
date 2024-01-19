@@ -352,7 +352,7 @@ in
         htop
         pavucontrol
         sshfs
-        exa
+        eza
         rofi
         git
         thefuck
@@ -402,7 +402,7 @@ in
         # research
         texlive.combined.scheme-full
         fpm
-        julia
+        julia-bin
         fobis
 
         # lf
@@ -461,9 +461,9 @@ in
         # Apps
         mumble
         spotify
-        zotero
+        zotero_7
         termpdfpy
-        sage
+        #sage
         calibre
         onlyoffice-bin
         tdesktop
@@ -489,8 +489,7 @@ in
         droidmote
         gimp-with-plugins
         pinta
-        obsidian
-        bottles
+        #obsidian
         #ventoy-bin
         #usbimager
         #jellyfin-mpv-shim
@@ -686,7 +685,7 @@ in
     };
 
     fonts = {
-      fonts = with pkgs; [
+      packages = with pkgs; [
        font-awesome
        cantarell-fonts
        roboto-mono
@@ -809,7 +808,7 @@ in
       drivers = [ ];
     };
     services.avahi.enable = true;
-    services.avahi.nssmdns = true;
+    services.avahi.nssmdns4 = true;
     # for a WiFi printer
     services.avahi.openFirewall = true;
     hardware.printers = {

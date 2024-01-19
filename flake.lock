@@ -2,40 +2,23 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1694937365,
-        "narHash": "sha256-iHZSGrb9gVpZRR4B2ishUN/1LRKWtSHZNO37C8z1SmA=",
+        "lastModified": 1705496572,
+        "narHash": "sha256-rPIe9G5EBLXdBdn9ilGc0nq082lzQd0xGGe092R/5QE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5d017a8822e0907fb96f7700a319f9fe2434de02",
+        "rev": "842d9d80cfd4560648c785f8a4e6f3b096790e19",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-23.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-bcachefs": {
-      "locked": {
-        "lastModified": 1691387984,
-        "narHash": "sha256-mICRp0XfVsaiA9hpgHu860wt0Hi0v6CZoWror6N3Z8Y=",
-        "owner": "YellowOnion",
-        "repo": "nixpkgs",
-        "rev": "859c91e0c68c3def7622e1af13993ab16e26f761",
-        "type": "github"
-      },
-      "original": {
-        "owner": "YellowOnion",
-        "ref": "bcachefs-fix",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "nixpkgs-bcachefs": "nixpkgs-bcachefs"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
