@@ -513,7 +513,7 @@ in
         #yuzu-ea
         rpcs3
         pcsx2
-        wine64Packages.stagingFull
+        wine-wayland
         airshipper
         steam-run
         protontricks
