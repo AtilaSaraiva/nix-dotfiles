@@ -385,6 +385,7 @@ in
         nix-update
         nixpkgs-review
         direnv
+        waypipe
         niv
         file
         cheat
