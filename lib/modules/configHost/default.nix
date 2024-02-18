@@ -965,7 +965,13 @@ in
       extraBackends = [ pkgs.sane-airscan ];
     };
 
-    hardware.bluetooth.enable = true;
+    hardware.bluetooth = {
+      enable = true;
+      input = {
+        UserspaceHID=true;
+        ClassicBondedOnly=false; # necessary for dualshock controllers
+      };
+    };
     services.blueman.enable = true;
     virtualisation = {
       podman = {
