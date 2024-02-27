@@ -9,6 +9,15 @@ self: super: rec {
   monitor-dimensions-calculator      = super.callPackage ./monitor-dimensions-calculator { };
   animedownloader     = super.python3Packages.callPackage ./animedownloader { };
   sirula = super.callPackage ./sirula { };
+  obs-studio-wrapped = super.wrapOBS.override { inherit (super) obs-studio; } {
+    plugins = with super.obs-studio-plugins; [
+      obs-gstreamer
+      obs-pipewire-audio-capture
+      obs-vaapi
+      obs-vkcapture
+      wlrobs
+    ];
+  };
   #bcachefs-tools = super.bcachefs-tools.overrideAttrs (oldAttrs: {
     #version = "unstable-2023-03-19";
     #src = super.fetchgit {

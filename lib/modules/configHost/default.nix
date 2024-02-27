@@ -481,7 +481,7 @@ in
         libsForQt5.okular
         qbittorrent
         xournalpp
-        obs-studio
+        obs-studio-wrapped
         inkscape
         blanket
         libreoffice-fresh
@@ -968,8 +968,10 @@ in
     hardware.bluetooth = {
       enable = true;
       input = {
-        UserspaceHID=true;
-        ClassicBondedOnly=false; # necessary for dualshock controllers
+        General = {
+          UserspaceHID=true;
+          ClassicBondedOnly=false; # necessary for dualshock controllers
+        };
       };
     };
     services.blueman.enable = true;
