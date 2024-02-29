@@ -505,6 +505,7 @@ in
 
       defaultGaming = [
         # Gaming
+        chiaki
         zeroad
         forge-mtg
         minetest
