@@ -341,9 +341,9 @@ in
         neovim
 
         # System tools
-        (pkgs.writeShellScriptBin "nixf" ''
-          exec ${pkgs.nixVersions.nix_2_14}/bin/nix --experimental-features "nix-command flakes" "$@"
-        '')
+        #(pkgs.writeShellScriptBin "nixf" ''
+          #exec ${pkgs.nixVersions.nix_2_14}/bin/nix --experimental-features "nix-command flakes" "$@"
+        #'')
         wget
         vulkan-tools
         clinfo
@@ -465,7 +465,7 @@ in
         zotero_7
         termpdfpy
         #sage
-        calibre
+        #calibre
         onlyoffice-bin
         tdesktop
         dropbox
@@ -488,7 +488,7 @@ in
         element-desktop
         youtube-dl
         droidmote
-        gimp-with-plugins
+        gimp
         pinta
         #obsidian
         #ventoy-bin
@@ -540,6 +540,14 @@ in
           else [ ])
         ++ cfg.packages.extra;
 
+    services.displayManager = {
+      defaultSession = "sway";
+
+      autoLogin = {
+        enable = true;
+        user = "atila";
+      };
+    };
 
     services.xserver = {
       enable = true;
@@ -555,20 +563,15 @@ in
           };
         };
 
-        defaultSession = "sway";
-        autoLogin = {
-          enable = true;
-          user = "atila";
-        };
       };
 
       #desktopManager.cinnamon.enable = true;
 
       libinput.enable = true;
 
-      layout = cfg.devices.input.keyboard.xkbLayout;
-      xkbVariant = cfg.devices.input.keyboard.xkbVariant;
-      xkbOptions = cfg.devices.input.keyboard.xkbOptions;
+      xkb.layout = cfg.devices.input.keyboard.xkbLayout;
+      xkb.variant = cfg.devices.input.keyboard.xkbVariant;
+      xkb.options = cfg.devices.input.keyboard.xkbOptions;
     };
 
     programs.gamemode.enable = true;
@@ -851,6 +854,7 @@ in
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+      pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
     };
 
     programs.ssh = {
@@ -911,6 +915,7 @@ in
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
+        wireplumber.enable = true;
     };
     hardware.pulseaudio.enable = false;
 
@@ -921,36 +926,36 @@ in
       openFirewall = true;
     };
 
-    environment.etc = let
-      json = pkgs.formats.json {};
-    in {
-      "pipewire/pipewire-pulse.d/92-low-latency.conf".source = json.generate "92-low-latency.conf" {
-        context.modules = [
-          {
-            name = "libpipewire-module-protocol-pulse";
-            args = {
-              pulse.min.req = "32/48000";
-              pulse.default.req = "32/48000";
-              pulse.max.req = "32/48000";
-              pulse.min.quantum = "32/48000";
-              pulse.max.quantum = "32/48000";
-            };
-          }
-        ];
-        stream.properties = {
-          node.latency = "32/48000";
-          resample.quality = 1;
-        };
-      };
-      "pipewire/pipewire.d/92-low-latency.conf".source = json.generate "92-low-latency.conf" {
-        context.properties = {
-          default.clock.rate = 48000;
-          default.clock.quantum = 32;
-          default.clock.min-quantum = 32;
-          default.clock.max-quantum = 32;
-        };
-      };
-    };
+    #environment.etc = let
+      #json = pkgs.formats.json {};
+    #in {
+      #"pipewire/pipewire-pulse.d/92-low-latency.conf".source = json.generate "92-low-latency.conf" {
+        #context.modules = [
+          #{
+            #name = "libpipewire-module-protocol-pulse";
+            #args = {
+              #pulse.min.req = "32/48000";
+              #pulse.default.req = "32/48000";
+              #pulse.max.req = "32/48000";
+              #pulse.min.quantum = "32/48000";
+              #pulse.max.quantum = "32/48000";
+            #};
+          #}
+        #];
+        #stream.properties = {
+          #node.latency = "32/48000";
+          #resample.quality = 1;
+        #};
+      #};
+      #"pipewire/pipewire.d/92-low-latency.conf".source = json.generate "92-low-latency.conf" {
+        #context.properties = {
+          #default.clock.rate = 48000;
+          #default.clock.quantum = 32;
+          #default.clock.min-quantum = 32;
+          #default.clock.max-quantum = 32;
+        #};
+      #};
+    #};
 
     hardware.sane = {
       enable = true;
