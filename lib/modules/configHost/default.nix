@@ -516,13 +516,13 @@ in
         rpcs3
         pcsx2
         wine-wayland
+        winetricks
         airshipper
         steam-run
         protontricks
         #unstable.cataclysm-dda
         mangohud
         openmw
-        gamescope
         dwarf-fortress-packages.dwarf-fortress-full
         #(pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
           #dfVersion = "0.44.11";
@@ -1009,6 +1009,8 @@ in
       gamescopeSession.enable = true;
       extest.enable = true;
     };
+
+    programs.gamescope.enable = true;
     hardware.steam-hardware.enable = true;
 
     # Rule to increase polling rate of dualshock 4 to reduce input lag
