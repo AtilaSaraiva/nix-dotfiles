@@ -173,22 +173,22 @@
     programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
   };
 
-  specialisation.nogui.configuration = {
-    system.nixos.tags = [ "nogui" ];
-    services.xserver.enable = lib.mkForce false;
-    programs.sway.enable = lib.mkForce false;
-    powerManagement = {
-      cpuFreqGovernor = "powersave";
-      cpufreq.max = 1400000;
-      scsiLinkPolicy = "med_power_with_dipm";
-    };
+  #specialisation.nogui.configuration = {
+    #system.nixos.tags = [ "nogui" ];
+    #services.xserver.enable = lib.mkForce false;
+    #programs.sway.enable = lib.mkForce false;
+    #powerManagement = {
+      #cpuFreqGovernor = "powersave";
+      #cpufreq.max = 1400000;
+      #scsiLinkPolicy = "med_power_with_dipm";
+    #};
 
-    services.qbittorrent = {
-      enable = true;
-      user = "atila";
-    };
-    programs.kdeconnect.enable = lib.mkForce false;
-  };
+    #services.qbittorrent = {
+      #enable = true;
+      #user = "atila";
+    #};
+    #programs.kdeconnect.enable = lib.mkForce false;
+  #};
 
   services.undervolt = {
     enable = true;
@@ -221,6 +221,8 @@
       };
     };
   };
+
+  powerManagement.cpuFreqGovernor = "performance";
 
   systemd.user.services.pluto = {
     description = "Pluto.jl";
